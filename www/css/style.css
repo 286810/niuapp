@@ -1,0 +1,280 @@
+a {
+  text-decoration: none;
+}
+.ft-12 {
+    font-size: 12px;
+}
+.ft-14 {
+  font-size: 14px;
+}
+.ft-66 {
+    font-size: 66px;
+}
+.margin0 {
+    margin: 0;
+}
+.margin10-left {
+  margin-left: 10px;
+}
+.margin20-top {
+    margin-top: 20px;
+}
+.margin20-bottom {
+  margin-bottom: 20px;
+}
+.margin40-top {
+    margin-top: 40px;
+}
+.border0 {
+    border: 0;
+}
+.border-right0 {
+    border-right: 0;
+}
+.border-radius50 {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.border-radius10 {
+  border-radius: 10px;
+}
+.border-radius22 {
+  border-radius: 22px;
+}
+.border-solid {
+  border-width: 1px;
+  border-style: solid;
+}
+.padding0 {
+    padding: 0;
+}
+.padding5 {
+  padding: 5px;
+}
+.padding20-top {
+    padding-top: 20px;
+}
+.padding40-top {
+    padding-top: 40px;
+}
+.padding5-0 {
+    padding: 5px 0;
+}
+.padding0-5 {
+  padding: 0 5px;
+}
+.place-left {
+  float: left;
+}
+.place-right {
+  float: right;
+}
+.place-clear {
+  clear: both;
+}
+.relative {
+    position: relative;
+}
+/*自定义颜色*/
+.gray {
+    color: #edecf1;
+}
+.gray.activated {
+  color: #ccc;
+}
+.gray-bg {
+    background-color: #edecf1;
+}
+.brown {
+    color: #d3a669 ;
+}
+.brown-bg {
+    background-color: #d3a669 ;
+}
+.green {
+    color: #96c2a0;
+}
+.green-bg {
+    background-color: #96c2a0;
+}
+.button.button-green {
+  background-color: #96c2a0;
+}
+.button.button-green.button-clear {
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #96c2a0;
+}
+.bar.bar-green {
+  border-color: #28a54c;
+  background-color: #96c2a0;
+  background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
+  color: #fff;
+}
+ion-tabs.tabs-color-active-gray .tab-item.tab-item-active, ion-tabs.tabs-color-active-gray .tab-item.active, ion-tabs.tabs-color-active-gray .tab-item.activated {
+    color: #edecf1;
+}
+ion-tabs.tabs-color-active-brown .tab-item.tab-item-active, ion-tabs.tabs-color-active-brown .tab-item.active, ion-tabs.tabs-color-active-brown .tab-item.activated {
+    color: #d3a669;
+}
+ion-tabs.tabs-color-active-green .tab-item.tab-item-active, ion-tabs.tabs-color-active-green .tab-item.active, ion-tabs.tabs-color-active-green .tab-item.activated {
+    color: #96c2a0;
+}
+/*首页*/
+.guider-tab h4 {
+  color: #edecf1;
+  margin: 2px auto;
+  width: 26px;
+  border-radius: 13px;
+  background-color: #ffffff;
+  padding: 3px;
+}
+.guider-tab.tab-item-active h4 {
+  color: #ffffff;
+  margin: 2px auto;
+  width: 26px;
+  border-radius: 13px;
+  background-color: #96c2a0;
+  padding: 3px;
+}
+.publish-tab .tab-title {
+  background-color: #d3a669;
+  display: inline-block;
+  margin: 5px 0;
+  height: 40px;
+  line-height: 40px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.publish-tab .tab-title h5 {
+  margin:  0;
+  color: #ffffff;
+}
+/*.publish-tab.tab-item-active .tab-title {
+  background-color: #fff;
+}
+.publish-tab.tab-item-active .tab-title h5 {
+  color: #96c2a0;
+}*/
+/*果先生*/
+.guider-search-wrap, .guider-search {
+    border-radius: 26px !important;
+}
+.guider-search {
+    background-color: #ccc;
+}
+.searchTip {
+  left: 35%;
+  z-index: 0;
+}
+.guider-search input {
+  z-index: 9;
+}
+.guiderCard {
+  padding-bottom: 32px;
+  background: url("../img/guider-bg.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.age, .guiderAge {
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  padding: 0 5px;
+}
+.guiderAddress {
+
+}
+.guiderLabel {
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  padding: 2px 6px;
+}
+
+/*消息*/
+#message h2 {
+  font-weight: bold;
+}
+
+#msg-chat .list {
+  transition: all .5s;
+}
+#msg-chat .item {
+  border: 0;
+  padding-bottom: 0;
+}
+#msg-chat .header {
+  border-radius: 25px;
+  max-width: 50px;
+  max-height: 50px;
+}
+#msg-chat .item-thumbnail-left {
+  padding-left: 80px;
+}
+#msg-chat .item-thumbnail-right {
+  padding-right: 80px;
+}
+#msg-chat p {
+  white-space: normal;
+}
+.contacts-info {
+  background: url("../img/guider-bg.jpg");
+  background-size: cover;
+}
+.item-thumbnail-left, .item-thumbnail-left .item-content, .item-thumbnail-right, .item-thumbnail-right .item-content {
+  min-height: 70px;
+}
+.content-box {
+  border-radius: 10px;
+  padding: 5px;
+  white-space: normal;
+  display: inline-block;
+}
+#chat-div-input {
+  border-radius: 10px;
+  overflow: scroll;
+  flex: 0 0 70%;
+  max-width: 70%;
+}
+#msg-chat .bar-footer button {
+  flex: 0 0 15%;
+  max-width: 15%;
+}
+/*行程*/
+#msg-journey .item, #journey-cost .item {
+  overflow: visible;
+}
+.time-line {
+  margin-right: 1px;
+  border-right: 1px solid #ccc;
+}
+.journey-date {
+  border-left: 3px solid #000;
+  margin-left: -12px !important;
+}
+.scenery-img {
+  margin-left: -36px !important;
+}
+.journey-topic {
+  margin-left: -39px !important;
+}
+.scenery-intro {
+  white-space: normal;
+}
+.journey-cost {
+  position: absolute;
+  bottom: 45px;
+}
+
+.journey-price {
+  margin-top: 5px !important;
+}
+/*右侧栏*/
+.menu-right {
+  background: url("../img/guider-bg.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+
+
+

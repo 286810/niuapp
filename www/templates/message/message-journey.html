@@ -1,0 +1,70 @@
+<ion-view hide-nav-bar="true" id="msg-journey">
+  <ion-header-bar>
+    <div class="buttons">
+      <button ng-click="back()" class="button button-clear icon ion-ios-arrow-back"></button>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons">
+      <button class="button button-clear button-balanced">拒绝行程</button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="gray-bg">
+    <div class="row">
+      <div class="col-10 time-line"></div>
+      <div class="list col-90">
+        <div>
+          <div class="item border0 padding item-divider gray-bg">
+            <h2 class="journey-date padding-left">第一天</h2>
+          </div>
+          <div class="item border0 item-avatar">
+            <img class="scenery-img" ng-src="./img/hotman-2.jpg">
+            <h3 class="journey-topic gray">
+              09:00 <span class="padding-left">去喜马拉雅山</span>
+            </h3>
+            <p class="scenery-intro padding-left">地点大致介绍</p>
+          </div>
+        </div>
+        <div>
+          <div class="item border0 padding item-divider gray-bg">
+            <h2 class="journey-date padding-left">第二天</h2>
+          </div>
+          <div class="item border0 item-avatar">
+            <img class="scenery-img" ng-src="./img/hotman-2.jpg">
+            <h3 class="journey-topic gray">
+              09:00 <span class="padding-left">去喜马拉雅山</span>
+            </h3>
+            <p class="scenery-intro padding-left">地点大致介绍</p>
+          </div>
+        </div>
+        <div>
+          <div class="item border0 padding item-divider gray-bg">
+            <h2 class="journey-date padding-left">第三天</h2>
+          </div>
+          <div class="item border0 item-avatar">
+            <img class="scenery-img" ng-src="./img/hotman-2.jpg">
+            <h3 class="journey-topic gray">
+              09:00 <span class="padding-left">去喜马拉雅山</span>
+            </h3>
+            <p class="scenery-intro padding-left">地点大致介绍</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <div class="journey-cost row padding light-bg">
+    <div class="col-50">
+      费用总计 <span class="assertive h4">￥8888</span>
+    </div>
+    <div class="col-50 text-right ">
+      <a href="#/tab/journey-cost-detail" class="gray">
+        费用详情
+      </a>
+    </div>
+  </div>
+  <div class="bar bar-footer bar-balanced">
+    <div class="title padding5-0">
+      <a href="#/tab/journey-confirm" class="button button-clear">确认我的行程</a>
+    </div>
+  </div>
+</ion-view>

@@ -1,0 +1,66 @@
+<ion-view view-title="会话" id="msg-chat">
+  <!--<ion-header-bar class="bar-assertive">
+    <div class="buttons">
+      <a href="#/tab/message-chat-list" class="button button-clear icon ion-ios-arrow-back"></a>
+    </div>
+    <h1 class="title">会话</h1>
+  </ion-header-bar>-->
+  <ion-content>
+    <div class="list">
+      <div class="item contacts-info margin20-bottom">
+        <div class="text-center light padding5-0">
+          <span class="h4 light">{{contacts.name}}</span> <span class="icon ion-female light"></span>
+          <span class="brown-bg age">80后</span>
+
+          <div class="light relative ft-12 padding5-0">北京朝阳</div>
+          <div class="padding-bottom">
+            <span class="icon ion-ios-star h3 energized"></span>
+            <span class="icon ion-ios-star h3 energized"></span>
+            <span class="icon ion-ios-star h3 energized"></span>
+            <span class="icon ion-ios-star h3 energized"></span>
+            <span class="icon ion-ios-star h3 gray"></span>
+          </div>
+        </div>
+      </div>
+      <div ng-repeat="item in chatData" class="item " ng-class="{ 'item-thumbnail-left': item.pos=='left', 'item-thumbnail-right': item.pos=='right'}">
+        <img class="header" ng-src="{{item.face}}" >
+        <!--<h2>小红</h2>-->
+        <p class="padding-top" ng-class="{ 'place-right': item.pos=='right', 'place-left': item.pos=='left' }">
+          <span class="content-box" ng-class="{ 'place-right': item.pos=='right', 'place-left': item.pos=='left',
+            'green-bg': item.pos=='right', 'stable-bg': item.pos=='left'}">
+            {{item.content}}
+          </span>
+        </p>
+      </div>
+      <div ng-click="lookJourney()" class="button button-clear button-dark padding margin20-top">
+        <div class="border-radius22 padding0-5 ft-12 border-solid balanced-border">
+          系统提示：果先生已制定好了您的专属行程，点此查看
+        </div>
+      </div>
+
+    </div>
+  </ion-content>
+  <ion-footer-bar keyboard-attach class="bar bar-footer row">
+    <!--<label class="item-input-wrapper">
+    </label>-->
+    <div contenteditable="true" id="chat-div-input" onfocusin="inputUp()" on-blur="inputDown()"
+         on-return="inputDown()" class="col-80 stable-bg"></div>
+    <button ng-click="sendMsg()" class="button button-positive button-clear icon ion-android-happy">
+
+    </button>
+    <!--<button ng-click="sendMsg()" class="button button-positive button-clear icon ion-ios-plus-outline">
+
+    </button>-->
+    <button ng-click="sendMsg()" class="button button-positive button-clear col-20">
+      发送
+    </button>
+    <!--<label ng-click="sendMsg()" class="item-input-wrapper light-bg">
+      <input type="text" ng-model="chat.content" on-focus="inputUp()" on-blur="inputDown()" on-return="closeKeyboard()"
+         class="stable-bg" >
+      <button class="button button-positive button-clear col-20">
+        发送
+      </button>
+    </label>-->
+  </ion-footer-bar>
+
+</ion-view>
