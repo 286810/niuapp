@@ -1,0 +1,44 @@
+<ion-view view-title="个人信息">
+  <ion-content id="basicinfo">
+
+    <form name="basicForm" class="padding">
+      <div class="text-center">
+        <span class="ion ion-ios-person stable ft-66"></span>
+        <div class="ft-12">点击上传头像 </div>
+      </div>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">输入昵称</span>
+          <input type="text" name="nickname" ng-model="traveler.nickname" required>
+        </label>
+        <label class="item item-input item-select">
+          <span class="input-label">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+          <select>
+            <option selected>男</option>
+            <option>女</option>
+          </select>
+        </label>
+        <div ng-click="selectCity()" class="item item-input">
+          <span class="input-label">所在城市</span>
+          <input class="text-left disable_input city_name" type="text" disabled ng-model="traveler.city_name"
+                 name="city_name" placeholder="" required="">
+        </div>
+        <label class="item item-input">
+          <span class="input-label">生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</span>
+          <input type="date" name="birthday" ng-model="traveler.birthday" required="">
+        </label>
+        <!--<div class="relative">-->
+          <!--<label class="item item-input">-->
+            <!--<span class="input-label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>-->
+            <!--<input type="email" name="email" ng-model="traveler.email" required="">-->
+          <!--</label>-->
+        <!--</div>  ng-disabled="basicForm.$invalid"-->
+
+      </div>
+
+      <button ng-click="finishBasic(basicForm)" class="button button-block button-green" >
+        完成
+      </button>
+    </form>
+  </ion-content>
+</ion-view>

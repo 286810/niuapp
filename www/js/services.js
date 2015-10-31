@@ -57,4 +57,20 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+.factory('PlanService', function () {
+    var allPlan = [];
+
+    return {
+      data: function () {
+        return allPlan;
+      },
+      dataCache: function (oldPlan) {
+
+        allPlan.push(oldPlan);
+        console.log(allPlan);
+        //return [];
+      }
+    }
+  });

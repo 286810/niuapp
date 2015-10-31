@@ -1,0 +1,14 @@
+<ion-view view-title="{{country}}">
+  <ion-content class="padding0">
+    <div class="margin10-bottom list country-intro padding0">
+      <a ng-repeat="item in destinationCityList" href="#/tab/destination/{{countryId}}/{{item.id}}" class="item border0 item-image margin5-bottom">
+        <img ng-src="{{item.img}}" height="180" >
+        <div class="city-intro-text col">
+          <div class="light ft-bold ft-22 padding-bottom">{{item.name}}</div>
+          <span class="light">有{{item.vistedNum}}个果米去过</span>
+        </div>
+      </a>
+    </div>
+
+  </ion-content>
+</ion-view>

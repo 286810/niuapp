@@ -1,0 +1,26 @@
+<ion-view view-title="发布计划">
+  <ion-content class="stable-bg">
+    <ion-list class="add-city-list" class="margin20-top" show-delete="false" can-swipe="true">
+      <ion-item ng-repeat="item in hadAddCity track by $index" class="margin10-bottom">
+        <span class="ft-bold" ng-bind="item.city"></span>
+        <span class="border-radius10 stable-bg padding5 ft-12">{{item.day_num}}天</span>
+        <p class="padding5-top">{{item.topic_str}}</p>
+        <ion-option-button class="ion-ios-trash-outline brown-bg light ft-38" ng-click="hadAddCity.splice($index, 1)">
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar>
+    <div class="row text-center padding0">
+      <a href="#/tab/publish/{{countryId}}/addCity" class="col button button-clear button-brown">
+        添加城市
+      </button>
+      <div class="col gray">
+        or
+      </div>
+      <a href="#/tab/publish/{{countryId}}/plan-detail" class="col button button-clear button-green">
+        下一步
+      </a>
+    </div>
+  </ion-footer-bar>
+</ion-view>

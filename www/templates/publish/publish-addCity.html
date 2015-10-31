@@ -1,0 +1,32 @@
+<ion-view hide-nav-bar="true">
+  <ion-header-bar>
+    <div class="buttons">
+      <button ng-click="back()" class="button button-clear button-brown">取消</button>
+    </div>
+    <div class="title">添加城市</div>
+    <div class="buttons">
+      <button ng-click="continueAddCity()" class="button button-clear button-brown">确定</button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="stable-bg">
+    <div class="list margin20-top">
+      <div ng-click="toCityList()" class="item item-icon-right">
+        城市
+        <span class="item-note green">{{plan.city}}</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <label class="item item-input item-icon-right">
+        <span class="input-label">天数</span>
+        <input type="number" class="plan_day_num" ng-model="plan.day_num" placeholder="请输入1-9的数字">
+
+      </label>
+      <div ng-click="toTopicList()" class="item item-icon-right">
+        主题
+        <span class="item-note green">{{plan.topic_str}}</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+
+    </div>
+  </ion-content>
+
+</ion-view>

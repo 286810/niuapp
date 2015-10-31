@@ -2,22 +2,37 @@ a {
   text-decoration: none;
 }
 .ft-12 {
-    font-size: 12px;
+    font-size: 12px !important;
 }
 .ft-14 {
   font-size: 14px;
 }
+.ft-22 {
+  font-size: 22px;
+}
+.ft-38 {
+  font-size: 38px;
+}
 .ft-66 {
     font-size: 66px;
 }
+.ft-bold {
+  font-weight: bold;
+}
 .margin0 {
-    margin: 0;
+    margin: 0 !important;
 }
 .margin10-left {
   margin-left: 10px;
 }
 .margin20-top {
     margin-top: 20px;
+}
+.margin10-bottom {
+  margin-bottom: 10px;
+}
+.margin5-bottom {
+  margin-bottom: 5px;
 }
 .margin20-bottom {
   margin-bottom: 20px;
@@ -26,7 +41,7 @@ a {
     margin-top: 40px;
 }
 .border0 {
-    border: 0;
+    border: 0 !important;
 }
 .border-right0 {
     border-right: 0;
@@ -50,6 +65,9 @@ a {
 }
 .padding5 {
   padding: 5px;
+}
+.padding5-top {
+  padding-top: 5px;
 }
 .padding20-top {
     padding-top: 20px;
@@ -75,21 +93,30 @@ a {
 .relative {
     position: relative;
 }
+.item-divider-left {
+  border-left: 1px solid #dddddd;
+}
+.width-33 {
+  width: 33%;
+}
 /*自定义颜色*/
 .gray {
-    color: #edecf1;
+    color: #8E898B;
 }
 .gray.activated {
   color: #ccc;
 }
 .gray-bg {
-    background-color: #edecf1;
+    background-color: #8E898B;
 }
 .brown {
     color: #d3a669 ;
 }
 .brown-bg {
     background-color: #d3a669 ;
+}
+.button.button-clear.button-brown {
+  color: #d3a669 ;
 }
 .green {
     color: #96c2a0;
@@ -99,6 +126,7 @@ a {
 }
 .button.button-green {
   background-color: #96c2a0;
+  color: #ffffff;
 }
 .button.button-green.button-clear {
   border-color: transparent;
@@ -112,8 +140,11 @@ a {
   background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
   color: #fff;
 }
+.bar.bar-green .button-clear {
+  color: #ffffff;
+}
 ion-tabs.tabs-color-active-gray .tab-item.tab-item-active, ion-tabs.tabs-color-active-gray .tab-item.active, ion-tabs.tabs-color-active-gray .tab-item.activated {
-    color: #edecf1;
+    color: #8E898B;
 }
 ion-tabs.tabs-color-active-brown .tab-item.tab-item-active, ion-tabs.tabs-color-active-brown .tab-item.active, ion-tabs.tabs-color-active-brown .tab-item.activated {
     color: #d3a669;
@@ -121,9 +152,18 @@ ion-tabs.tabs-color-active-brown .tab-item.tab-item-active, ion-tabs.tabs-color-
 ion-tabs.tabs-color-active-green .tab-item.tab-item-active, ion-tabs.tabs-color-active-green .tab-item.active, ion-tabs.tabs-color-active-green .tab-item.activated {
     color: #96c2a0;
 }
+.item {
+  border-left: 0;
+  border-right: 0;
+  /*border-top: 0;
+  margin-top: 1px;*/
+}
+textarea {
+  height: 100px;
+}
 /*首页*/
 .guider-tab h4 {
-  color: #edecf1;
+  color: #8E898B;
   margin: 2px auto;
   width: 26px;
   border-radius: 13px;
@@ -158,11 +198,21 @@ ion-tabs.tabs-color-active-green .tab-item.tab-item-active, ion-tabs.tabs-color-
   color: #96c2a0;
 }*/
 /*果先生*/
-.guider-search-wrap, .guider-search {
-    border-radius: 26px !important;
+#guider {
+  background: url("../img/02.png") no-repeat center center;
+  background-size: cover;
+}
+#guider .card {
+  margin-top: 10px;
+}
+.guider-search-wrap {
+  background-color: rgba(0, 0, 0, 0);
+  padding-left: 0;
+  padding-right: 0;
 }
 .guider-search {
-    background-color: #ccc;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.2)
 }
 .searchTip {
   left: 35%;
@@ -189,6 +239,96 @@ ion-tabs.tabs-color-active-green .tab-item.tab-item-active, ion-tabs.tabs-color-
   border: 1px solid #ffffff;
   border-radius: 10px;
   padding: 2px 6px;
+}
+
+/*目的地*/
+.country-intro-text, .city-intro-text {
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  background-color: rgba(0,0,0,.1);
+}
+.img-accessory {
+  top: 6px;
+}
+#destination-impress .box {
+  padding: 10px 0;
+}
+.box-busy {
+  background: url("../img/icon/007.png") no-repeat center center;
+  background-size: 80px;
+  padding: 20px 0;
+}
+.box-slack {
+  background: url("../img/icon/005.png") no-repeat center center;
+  background-size: 80px;
+  padding: 20px 0;
+}
+.box-tip {
+  background: url("../img/icon/006.png") no-repeat center center;
+  background-size: 80px;
+  padding: 20px 0;
+}
+
+/*发布*/
+.plan_day_num {
+  color: #96c2a0 !important;
+  text-align: right;
+}
+.topic-name {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+}
+.add-city-list .list {
+  margin-top: 20px;
+}
+.add-city-list .item {
+  margin-bottom: 10px;
+}
+.add-city-list .item-content {
+  padding: 10px;
+}
+.item-icon-left .input-label {
+  padding-left: 38px;
+}
+.list-options {
+  height: 44px;
+  border-bottom: 1px solid #ddd;
+  line-height: 36px;
+  margin-left: 13%;
+}
+.button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
+  font-size: 32px;
+  line-height: 32px;
+}
+.add-plan-img {
+  min-height: 66px;
+  line-height: 22px;
+  min-width: 66px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px dashed #ddd !important;
+}
+.popup {
+  border-radius: 10px !important;
+}
+.popup-item {
+  background-color: transparent;
+  border: 0;
+}
+.popup-head {
+  padding: 0 10px;
+}
+.popup-buttons .button {
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: #d3a669;
+}
+.popup-buttons .button.activated {
+  background: none;
+  color: #d3a669;
 }
 
 /*消息*/
@@ -271,10 +411,30 @@ ion-tabs.tabs-color-active-green .tab-item.tab-item-active, ion-tabs.tabs-color-
 }
 /*右侧栏*/
 .menu-right {
-  background: url("../img/guider-bg.jpg") no-repeat center center;
+  background: url("../img/03.png") no-repeat center center;
   background-size: cover;
 }
+.menu-right .item {
+  background-color: transparent;
+}
+/*我的*/
 
-
+/*行程*/
+#trip .card {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+  overflow: visible;
+}
+#trip .item, #trip-wait .item {
+  overflow: visible;
+  white-space: normal;
+}
+.trip-year, .list-head {
+  border-left: 3px solid #000000;
+  margin-left: -17px;
+}
+#trip-comment {
+  background: url("../img/02.png") no-repeat center center;
+  background-size: cover;
+}
 
 

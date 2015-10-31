@@ -6,12 +6,36 @@
     <file url="file://$PROJECT_DIR$/www/js/controllers.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/js/directives.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/js/services.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/destination/city-scenery-detail.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/destination/destination-city-detail.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/destination/destination-city.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/destination/destination-impress.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/destination/tab-country-detail.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/destination/tab-country.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/guider/tab-guider.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/message/chat-detail.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/message/journey-confirm.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/message/message-journey.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/message/tab-chats.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/my/my-bill.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/my/my-info.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/my/my-trip-wait.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/my/my-trip.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/my/tab-my.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/my/trip-wait-comment.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/my/trip-wait-pay.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/public/basicInfo.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/public/forgetPwd.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/public/login.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/public/register.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/public/resetPwd.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/public/tabs.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/public/travelerTag.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/publish/continue-addCity.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/publish/plan-detail.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/publish/plan-other.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/publish/publish-addCity.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/publish/publish-country.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/publish/tab-publish.html" charset="UTF-8" />
   </component>
 </project>

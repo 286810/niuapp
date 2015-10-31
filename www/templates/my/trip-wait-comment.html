@@ -1,0 +1,44 @@
+<ion-view hide-nav-bar="true" id="trip-comment">
+  <ion-header-bar>
+    <h2 class="title">评价</h2>
+
+    <div class="buttons">
+      <button class="button button-clear button-brown">投诉</button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="">
+    <div class="list margin20-top">
+      <div class="item item-avatar">
+        <img ng-src="./img/guider.png" >
+        <h2>高圆圆</h2>
+        <div>
+          <span class="icon ion-ios-star h5 energized"></span>
+          <span class="icon ion-ios-star h5 energized"></span>
+          <span class="icon ion-ios-star h5 energized"></span>
+          <span class="icon ion-ios-star h5 energized"></span>
+          <span class="icon ion-ios-star h5 gray"></span>
+        </div>
+      </div>
+      <a href="#/tab/my-trip-detail" class="item item-icon-right">
+        查看行程及费用
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </a>
+      <div class="item text-center">
+        <span class="icon ion-ios-star h2" ng-click="one = !one" ng-class="{ 'energized': one, 'gray': !one }"></span>
+        <span class="icon ion-ios-star h2" ng-click="two = !two" ng-class="{ 'energized': two, 'gray': !two }"></span>
+        <span class="icon ion-ios-star h2" ng-click="t = !t" ng-class="{ 'energized': t, 'gray': !t }"></span>
+        <span class="icon ion-ios-star h2" ng-click="f = !f" ng-class="{ 'energized': f, 'gray': !f }"></span>
+        <span class="icon ion-ios-star h2" ng-click="ff = !ff" ng-class="{ 'energized': ff, 'gray': !ff }"></span>
+      </div>
+    </div>
+    <div class="item item-input">
+      <textarea placeholder="说点什么吧..."></textarea>
+    </div>
+  </ion-content>
+</ion-view>
+
+
+
+
+
+

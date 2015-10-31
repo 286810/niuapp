@@ -1,16 +1,32 @@
-<ion-view hide-nav-bar="true">
-  <ion-content class="padding gray-bg padding40-top">
-    <ion-slide-box on-slide-changed="" show-pager="false">
+<ion-view view-title="果先生" id="guider">
+  <ion-content class="padding ">
+    <ion-slide-box on-slide-changed="" show-pager="true">
       <ion-slide>
-        <div ng-click="guiderOpt.searching = true" class="list list-inset guider-search-wrap">
-          <label class="item item-input stable-bg guider-search">
-            <label ng-if="!guiderOpt.searching" class="searchTip relative">
-              <i class="icon ion-ios-search h4"></i> 搜索
-            </label>
-            <input type="text" placeholder="">
+        <div class="bar bar-header item-input-inset guider-search-wrap">
+          <label class="item-input-wrapper guider-search">
+            <i class="icon ion-ios-search placeholder-icon light"></i>
+            <input type="search" ng-model="city_name" placeholder="搜索导游" class="ng-pristine ng-valid ng-touched" >
           </label>
+          <!--<button class="button button-clear button-green">
+            搜索
+          </button>-->
         </div>
-        <div ng-click="guiderOpt.searching = false" class="list card">
+        <!--<div ng-click="guiderOpt.searching = true" class="list list-inset guider-search-wrap">
+          <label class="item item-input stable-bg guider-search">
+            <label class="item-input-wrapper">
+              <i class="icon ion-ios-search placeholder-icon"></i>
+              <input type="search" placeholder="搜索">
+            </label>
+            <button class="button button-clear">
+              搜索
+            </button>
+            <label ng-if="!guiderOpt.searching" class="searchTip relative">
+              <i class="icon ion-ios-search h4"></i>
+            &lt;!&ndash;</label>&ndash;&gt;
+            <input type="text" placeholder="搜索">
+          </label>
+        </div>-->
+        <div class="list card border-radius10">
           <div class="item guiderCard">
             <div class="text-center padding-top">
               <img ng-src="./img/guider.png" class="border-radius50" width="80">
@@ -43,15 +59,28 @@
         </div>
       </ion-slide>
       <ion-slide>
-        <div ng-click="guiderOpt.searching = true" class="list list-inset guider-search-wrap">
-          <label class="item item-input stable-bg guider-search">
-            <label ng-if="!guiderOpt.searching" class="searchTip relative">
-              <i class="icon ion-ios-search h4"></i> 搜索
-            </label>
-            <input type="text" placeholder="">
+        <div class="bar bar-header item-input-inset guider-search-wrap">
+          <label class="item-input-wrapper guider-search">
+            <i class="icon ion-ios-search placeholder-icon light"></i>
+            <input type="search" ng-model="city_name" placeholder="" class="ng-pristine ng-valid ng-touched" style="">
           </label>
         </div>
-        <div ng-click="guiderOpt.searching = false" class="list card">
+        <!--<div ng-click="guiderOpt.searching = true" class="list list-inset guider-search-wrap">
+          <label class="item item-input stable-bg guider-search">
+            <label class="item-input-wrapper">
+              <i class="icon ion-ios-search placeholder-icon"></i>
+              <input type="search" placeholder="搜索">
+            </label>
+            <button class="button button-clear">
+              搜索
+            </button>
+            <label ng-if="!guiderOpt.searching" class="searchTip relative">
+              <i class="icon ion-ios-search h4"></i>
+            &lt;!&ndash;</label>&ndash;&gt;
+            <input type="text" placeholder="搜索">
+          </label>
+        </div>-->
+        <div class="list card border-radius10">
           <div class="item guiderCard">
             <div class="text-center padding-top">
               <img ng-src="./img/guider.png" class="border-radius50" width="80">

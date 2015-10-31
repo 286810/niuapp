@@ -1,0 +1,30 @@
+<ion-view view-title="其他">
+  <ion-content class="stable-bg">
+    <div class="list margin20-top">
+      <div class="item item-input">
+        <textarea ng-model="plan.note" placeholder="说一下旅途中的行程愿景及你想对果先生说的话..."></textarea>
+      </div>
+      <div class="text-center padding-right">
+        <div class="width-33 place-left relative padding-left padding-top">
+          <span ng-click="addPlanImg()" class="button button-clear button-green add-plan-img">添加<br>图片</span>
+        </div>
+        <!--<img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >
+        <img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >
+        <img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >-->
+        <!--<div class="col-50 place-left ">
+          <img class="col-90" ng-src="./img/guider.png" >
+        </div>
+        <div class="col-50 place-left text-center">
+          <img class="col-90" ng-src="./img/guider.png" >
+        </div>-->
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar>
+    <div class="row text-center padding0">
+      <button ng-click="publishPlan()" class="col button button-clear button-green">
+        发布探险
+      </button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

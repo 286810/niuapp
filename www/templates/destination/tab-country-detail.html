@@ -1,0 +1,26 @@
+<ion-view view-title="{{country}}">
+  <ion-content class="stable-bg">
+    <div class="list">
+      <div class="item item-image">
+        <img ng-src="./img/japan.jpg" >
+        <div class="country-intro-text col">
+          <div class="light ft-bold ft-22 padding-bottom">日本</div>
+          <span class="light">100位果宝去过</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="list">
+      <a href="#/tab/destination/{{countryId}}/impress" class="item item-icon-right">
+        <img ng-src="./img/icon/001.png" class="img-accessory relative" height="26" >
+        <span class="padding0-5">目的地印象</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </a>
+      <a href="#/tab/destination/{{countryId}}/city" class="item item-icon-right">
+        <img ng-src="./img/icon/002.png" class="img-accessory relative" height="26" >
+        <span class="padding0-5">城市列表</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
