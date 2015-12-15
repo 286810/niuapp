@@ -7,7 +7,10 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'directives'])
 
-  .run(function ($ionicPlatform) {
+  .constant('Headers', {access_token: 'test123'})
+  .constant('Host', 'http://www.ocdday.com:9999')
+
+  .run(function ($ionicPlatform, $localStorage, $ionicPopup) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -20,6 +23,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
+
     });
   })
 
@@ -83,13 +87,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         templateUrl: 'templates/public/tabs.html'
       })
 
-      // Each tab has its own nav history stack:
-      .state('tab.guider', {
-        url: '/guider',
+      //首页
+      .state('tab.traveler', {
+        url: '/traveler',
         views: {
-          'tab-guider': {
-            templateUrl: 'templates/guider/tab-guider.html',
-            controller: 'GuiderCtrl'
+          'tab-traveler': {
+            templateUrl: 'templates/traveler/tab-traveler.html',
+            controller: 'TravelerCtrl'
           }
         }
       })
@@ -104,7 +108,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
         }
       })
-      .state('tab.destination-country-detail', {
+      /*.state('tab.destination-country-detail', {
         url: '/destination/:countryId',
         views: {
           'tab-destination': {
@@ -122,7 +126,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             controller: 'DestinationDetailCtrl'
           }
         }
-      })
+      })*/
       .state('tab.destination-city', {
         url: '/destination/:countryId/city',
         views: {
@@ -277,21 +281,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         views: {
           'tab-my': {
             templateUrl: 'templates/my/my-trip.html',
-            controller: 'MyCtrl'
-          }
-        }
-      })
-      .state('tab.my-trip-wait', {
-        url: '/my-trip-wait',
-        views: {
-          'tab-my': {
-            templateUrl: 'templates/my/my-trip-wait.html',
             controller: 'MyTripCtrl'
           }
         }
       })
+      .state('tab.my-trip-wait', {
+        url: '/my-trip-wait/:trips_orderid',
+        views: {
+          'tab-my': {
+            templateUrl: 'templates/my/my-trip-wait.html',
+            controller: 'TripWaitDetailCtrl'
+          }
+        }
+      })
       .state('tab.trip-wait-pay', {
-        url: '/trip-wait-pay',
+        url: '/trip-wait-pay/:trips_orderid',
         views: {
           'tab-my': {
             templateUrl: 'templates/my/trip-wait-pay.html',
@@ -300,7 +304,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('tab.trip-wait-comment', {
-        url: '/trip-wait-comment',
+        url: '/trip-wait-comment/:trips_orderid',
         views: {
           'tab-my': {
             templateUrl: 'templates/my/trip-wait-comment.html',
@@ -325,9 +329,63 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             controller: 'MyCtrl'
           }
         }
+      })
+      .state('tab.my-set', {
+        url: '/my-set',
+        views: {
+          'tab-my': {
+            templateUrl: 'templates/my/my-set.html',
+            controller: 'MyCtrl'
+          }
+        }
+      })
+      .state('tab.my-account-safe', {
+        url: '/my-account-safe',
+        views: {
+          'tab-my': {
+            templateUrl: 'templates/my/my-account-safe.html',
+            controller: 'MyCtrl'
+          }
+        }
+      })
+      .state('tab.my-about', {
+        url: '/my-about',
+        views: {
+          'tab-my': {
+            templateUrl: 'templates/my/my-about.html',
+            controller: 'MyCtrl'
+          }
+        }
+      })
+      .state('tab.my-service', {
+        url: '/my-service',
+        views: {
+          'tab-my': {
+            templateUrl: 'templates/my/my-service.html',
+            controller: 'MyCtrl'
+          }
+        }
+      })
+      .state('tab.my-consult', {
+        url: '/my-consult',
+        views: {
+          'tab-my': {
+            templateUrl: 'templates/my/my-consult.html',
+            controller: 'MyCtrl'
+          }
+        }
+      })
+      .state('tab.my-become-guider', {
+        url: '/my-become-guider',
+        views: {
+          'tab-my': {
+            templateUrl: 'templates/my/my-become-guider.html',
+            controller: 'MyCtrl'
+          }
+        }
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/guider');
+    $urlRouterProvider.otherwise('/tab/traveler');
 
   });

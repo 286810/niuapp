@@ -2,7 +2,7 @@
   <ion-header-bar>
     <h2 class="title">等待行程</h2>
     <div class="buttons">
-      <button class="button button-clear button-brown">取消行程</button>
+      <button ng-click="cancelTrip()" class="button button-clear button-brown">取消行程</button>
     </div>
   </ion-header-bar>
   <ion-content class="padding stable-bg">
@@ -15,39 +15,41 @@
     <div class="list card stable-bg margin0">
       <div class="item ft-14">
         <span>出发时间</span>
-        <span class="item-note dark"> 5月 </span>
+        <span class="item-note dark"> {{tripData.trips_leavetime}} </span>
       </div>
       <div class="item ft-14">
-        <span>人数</span>
-        <span class="item-note dark"> 4人 </span>
+        <span>男桑</span>
+        <span class="item-note dark"> {{tripData.trips_boy}}人 </span>
+      </div>
+      <div class="item ft-14">
+        <span>女桑</span>
+        <span class="item-note dark"> {{tripData.trips_girl}}人 </span>
+      </div>
+      <div class="item ft-14">
+        <span>小孩纸</span>
+        <span class="item-note dark"> {{tripData.trips_child}}人 </span>
       </div>
     </div>
 
     <div class="list card stable-bg">
-      <div class="item ft-14">
-        <span>东京 / 4天</span>
-        <span class="item-note dark"> 购物 </span>
-      </div>
-      <div class="item ft-14">
-        <span>大阪 / 4天</span>
-        <span class="item-note dark"> 参观景点 </span>
-      </div>
-      <div class="item ft-14">
-        <span>北海道 / 4天</span>
-        <span class="item-note dark"> 泡温泉 </span>
+      <div ng-repeat="item in tripData.trips_dest" class="item ft-14">
+        <span>{{item.city}} / {{item.daynum}}天</span>
+        <span class="item-note dark" >
+          {{item.title}}
+        </span>
       </div>
     </div>
 
-    <div class="list card stable-bg">
+    <div ng-if="tripData.trips_talk" class="list card stable-bg">
       <div class="item ft-14">
         <span>行程愿景</span>
-        <span class="item-note dark"> 随心行走 </span>
+        <span class="item-note dark"> {{tripData.trips_talk}} </span>
       </div>
     </div>
 
     <div class="list">
-      <div class="item item-image">
-        <img ng-src="./img/trip-wait.jpg" >
+      <div ng-repeat="item in tripData.trips_imgs" class="item item-image item-mid-img stable-bg padding border0">
+        <img src="{{item}}" >
       </div>
     </div>
   </ion-content>

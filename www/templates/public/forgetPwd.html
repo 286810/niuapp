@@ -4,19 +4,36 @@
       <h2 class="text-center brown">身份验证</h2>
     </div>
 
-    <div class="list margin20-top">
-      <div class="item item-input">
-        <input type="number" ng-model="traveler.phoneFourDigits" placeholder="请输入手机号后四位">
+    <form name="forgetForm">
+      <div class="list margin20-top">
+        <label class="item item-input">
+        <span class="input-label">
+          手&nbsp;&nbsp;机&nbsp;&nbsp;号
+        </span>
+          <input type="number" ng-model="traveler.phone" ng-pattern="/^1[3-8]{1}\d{9}$/" required>
+        </label>
+        <label class="item item-input">
+        <span class="input-label">
+          设置密码
+        </span>
+          <input type="password" ng-model="traveler.password" required>
+        </label>
+        <label class="item item-input">
+        <span class="input-label">
+          确认密码
+        </span>
+          <input type="password" ng-model="traveler.confirm_password" required>
+        </label>
+        <div class="item item-input item-button-right">
+          <span class="input-label">验&nbsp;&nbsp;证&nbsp;&nbsp;码</span>
+          <input type="text" name="captcha" ng-model="traveler.forget_captcha" ng-minlength="2" required >
+          <button ng-click="getVerify()" class="button button-clear button-green ft-12">获取验证码</button>
+        </div>
       </div>
-      <label class="item item-input item-button-right">
-        <span class="input-label">输入验证码</span>
-        <input type="text" name="captcha" ng-model="traveler.captcha" ng-minlength="2" required >
-        <button class="button button-clear button-green ft-12">获取验证码</button>
-      </label>
-    </div>
+    </form>
 
     <div class="padding">
-      <button class="button button-block button-green">完成</button>
+      <button ng-click="forgetPwd()" ng-disabled="forgetForm.$invalid" class="button button-block button-green">完成</button>
     </div>
   </ion-content>
 </ion-view>

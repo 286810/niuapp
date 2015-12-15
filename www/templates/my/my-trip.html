@@ -5,20 +5,31 @@
       <div class="item stable-bg border0">
         <span class="trip-year list-header padding-left">2015</span>
       </div>
-      <a href="#/tab/my-trip-wait" class="item border0 margin10-bottom ft-14">
-        <span class="gray">5.3-5.10</span> <span class="padding-left">大阪 - </span> <span>3日游</span>
-        <span class="item-note"> 等待行程 </span>
+      <a ng-repeat="trip in tripsData" ng-if="trip.trips_status == 0 || trip.trips_status == 1 || trip.trips_status == 2" href="#/tab/my-trip-wait/{{trip.trips_orderid}}"
+         class="item border0 margin10-bottom ft-14 padding10-top padding10-bottom rows">
+        <span class="gray col-30">{{trip.trips_leave_time | date:'MM.dd'}}-{{trip.trips_end_time | date:'MM.dd'}}</span>
+        <span class=" col-55">
+          <span ng-repeat="dest in trip.trips_dest track by $index">{{dest.city}} - </span>
+          <span>{{trip.trips_daynum}}日游</span>
+        </span>
+        <span class="item-note col-15"> 待确认 </span>
       </a>
-      <a href="#/tab/trip-wait-pay" class="item border0 margin10-bottom ft-14">
-        <span class="gray">5.3-5.10</span> <span class="padding-left">大阪 - 北海道 - </span> <span>7日游</span>
+      <a ng-repeat="trip in tripsData" ng-if="trip.trips_status == 3" href="#/tab/trip-wait-pay/{{trip.trips_orderid}}" class="item border0 margin10-bottom ft-14
+      padding10-top padding10-bottom rows">
+        <span class="gray col-30">{{trip.trips_leave_time | date:'MM.dd'}}-{{trip.trips_end_time | date:'MM.dd'}}</span>
+        <span class=" col-55">
+          <span ng-repeat="dest in trip.trips_dest track by $index">{{dest.city}} - </span>
+          <span>{{trip.trips_daynum}}日游</span>
+        </span>
         <span class="item-note"> <span class="green">待付款</span> </span>
       </a>
-      <a href="#/tab/trip-wait-comment" class="item border0 margin10-bottom ft-14">
-        <span class="gray">5.3-5.10</span> <span class="padding-left">大阪 - 北海道 - </span> <span>7日游</span>
-        <span class="item-note"> <span class="assertive">去评价</span> </span>
-      </a>
-      <a href="#/tab/trip-wait-comment" class="item border0 margin10-bottom ft-14">
-        <span class="gray">5.3-5.10</span> <span class="padding-left">大阪 - 北海道 - </span> <span>7日游</span>
+      <a ng-repeat="trip in tripsData" ng-if="trip.trips_status == 6" href="#/tab/trip-wait-comment/{{trip.trips_orderid}}" class="item border0 margin10-bottom ft-14
+      padding10-top padding10-bottom rows">
+        <span class="gray col-30">{{trip.trips_leave_time | date:'MM.dd'}}-{{trip.trips_end_time | date:'MM.dd'}}</span>
+        <span class=" col-55">
+          <span ng-repeat="dest in trip.trips_dest track by $index">{{dest.city}} - </span>
+          <span>{{trip.trips_daynum}}日游</span>
+        </span>
         <span class="item-note"> <span class="assertive">去评价</span> </span>
       </a>
     </div>

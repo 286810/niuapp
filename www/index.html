@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -14,8 +15,6 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <!-- zepto -->
-    <!--<script src="lib/zepto/zepto.js" defer></script>-->
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -25,6 +24,9 @@
     <script src="js/controllers.js"></script>
     <script defer src="js/services.js"></script>
     <script defer src="js/directives.js"></script>
+
+    <!-- openfire -->
+    <script src="lib/chat/strophe.js" defer ></script>
   </head>
   <body ng-app="starter" ng-controller="MainCtrl">
     <!--
@@ -70,13 +72,13 @@
       <!--主题列表-->
       <ion-side-menu side="left" ng-if="root.side_topic">
         <ion-header-bar>
-          <div class="buttons">
+          <!--<div class="buttons">
             <button ng-click="cancelTopic()" class="button button-clear button-brown">取消</button>
-          </div>
+          </div>-->
           <div class="title">选择主题</div>
-          <div class="buttons">
+          <!--<div class="buttons">
             <button ng-click="closeTopic()" class="button button-clear button-brown">确定</button>
-          </div>
+          </div>-->
         </ion-header-bar>
         <ion-content>
           <div class="list">
@@ -98,16 +100,24 @@
             <div ng-click="goto('tab.my-info')" class="margin20-bottom text-center padding">
               <img ng-src="./img/guider.png" width="100" class="border-radius50" >
             </div>
-            <div ng-click="goto('tab.my-footprint')" class="item border0 light item-icon-right">
-              足迹
-              <i class="icon ion-chevron-right icon-accessory"></i>
-            </div>
             <div ng-click="goto('tab.my-trip')" class="item border0 light item-icon-right">
               我的行程
               <i class="icon ion-chevron-right icon-accessory"></i>
             </div>
             <div ng-click="goto('tab.my-bill')" class="item border0 light item-icon-right">
-              账单
+              我的账单
+              <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div ng-click="goto('tab.my-set')" class="item border0 light item-icon-right">
+              我的设置
+              <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div ng-click="goto('tab.my-service')" class="item border0 light item-icon-right">
+              我的客服
+              <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+            <div ng-click="goto('tab.my-become-guider')" class="item border0 light item-icon-right">
+              成为果先生
               <i class="icon ion-chevron-right icon-accessory"></i>
             </div>
           </div>

@@ -9,15 +9,21 @@
         </a>
         <label class="item item-input">
           <span class="input-label">手机号码</span>
-          <input type="number" name="phone" ng-pattern="/^1[3-8]{1}\d{9}$/" ng-model="traveler.phone" required >
+          <input type="number" name="phone" ng-pattern="/^1[3-8]{1}\d{9}$/" ng-model="traveler.phone" ng-blur="isExit(loginForm)" required >
         </label>
         <label class="item item-input">
           <span class="input-label">登录密码</span>
           <input type="password" name="password" ng-model="traveler.password" ng-minlength="2" required >
         </label>
       </div>
-      <div class="text-right padding-right">
-        <a href="#/forgetPwd" class="button button-clear button-green ft-12">忘记密码</a>
+      <div class="row">
+        <div class="col-50 text-left">
+          <a href="#/register" class="button button-clear button-green ft-12">去注册</a>
+        </div>
+        <div class="col-50 text-right">
+          <a href="#/forgetPwd" class="button button-clear button-green ft-12">忘记密码</a>
+        </div>
+
       </div>
 
       <div class="padding">

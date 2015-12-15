@@ -22,6 +22,12 @@ a {
 .margin0 {
     margin: 0 !important;
 }
+.margin5-top {
+  margin-top: 5px;
+}
+.margin5-bottom {
+  margin-bottom: 5px;
+}
 .margin10-left {
   margin-left: 10px;
 }
@@ -30,9 +36,6 @@ a {
 }
 .margin10-bottom {
   margin-bottom: 10px;
-}
-.margin5-bottom {
-  margin-bottom: 5px;
 }
 .margin20-bottom {
   margin-bottom: 20px;
@@ -69,6 +72,12 @@ a {
 .padding5-top {
   padding-top: 5px;
 }
+.padding10-top {
+  padding-top: 10px !important;
+}
+.padding10-bottom {
+  padding-bottom: 10px !important;
+}
 .padding20-top {
     padding-top: 20px;
 }
@@ -93,11 +102,30 @@ a {
 .relative {
     position: relative;
 }
+.absolute {
+  position: absolute;
+}
 .item-divider-left {
   border-left: 1px solid #dddddd;
 }
 .width-33 {
   width: 33%;
+}
+.col-30 {
+  -webkit-box-flex: 0;
+  flex: 0 0 30%;
+  max-width: 30%;
+}
+.col-55 {
+  -webkit-box-flex: 0;
+  flex: 0 0 55%;
+  max-width: 55%;
+}
+/*多行使用rows*/
+.rows {
+  display: flex;
+  padding: 5px;
+  width: 100%;
 }
 /*自定义颜色*/
 .gray {
@@ -110,7 +138,7 @@ a {
     background-color: #8E898B;
 }
 .brown {
-    color: #d3a669 ;
+    color: #d3a669 !important ;
 }
 .brown-bg {
     background-color: #d3a669 ;
@@ -119,7 +147,7 @@ a {
   color: #d3a669 ;
 }
 .green {
-    color: #96c2a0;
+    color: #96c2a0 !important;
 }
 .green-bg {
     background-color: #96c2a0;
@@ -160,6 +188,14 @@ ion-tabs.tabs-color-active-green .tab-item.tab-item-active, ion-tabs.tabs-color-
 }
 textarea {
   height: 100px;
+}
+input[type="search"]::-webkit-input-placeholder {
+  color: #ffffff;
+}
+/*确保 contenteditable 在 ios中可用*/
+div[contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
 }
 /*首页*/
 .guider-tab h4 {
@@ -245,7 +281,7 @@ textarea {
 .country-intro-text, .city-intro-text {
   position: absolute;
   top: 50%;
-  margin-top: -22px;
+  margin-top: -20px;
   background-color: rgba(0,0,0,.1);
 }
 .img-accessory {
@@ -268,6 +304,21 @@ textarea {
   background: url("../img/icon/006.png") no-repeat center center;
   background-size: 80px;
   padding: 20px 0;
+}
+.tipsToggle {
+  transform: rotate(0deg);
+  transition: all .3s;
+}
+.tipsList {
+  height: 0;
+  overflow: hidden;
+}
+.tipsToggle.active {
+  transform: rotate(180deg);
+  transition: all .3s;
+}
+.tipsList.active {
+  height: auto;
 }
 
 /*发布*/
@@ -318,6 +369,7 @@ textarea {
   border: 0;
 }
 .popup-head {
+  border: 0;
   padding: 0 10px;
 }
 .popup-buttons .button {
@@ -370,15 +422,47 @@ textarea {
   white-space: normal;
   display: inline-block;
 }
+.content-box .content-text {
+  position: relative;
+  top: -5px;
+}
 #chat-div-input {
-  border-radius: 10px;
-  overflow: scroll;
-  flex: 0 0 70%;
-  max-width: 70%;
+  /*border-radius: 5px;*/
+  overflow: auto;
+  height: 34px;
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+#chat-div-input img {
+  display: inline-block;
+  vertical-align: middle;
 }
 #msg-chat .bar-footer button {
   flex: 0 0 15%;
   max-width: 15%;
+}
+.face, .face-other {
+  bottom: 0;
+  height: 0;
+  top: auto;
+  transition: height .6s;
+}
+.face.active {
+  position: absolute;
+  height: 200px;
+}
+.face-other.active {
+  position: absolute;
+  height: 53px;
+}
+.bar-sent {
+  transition: all .6s;
+}
+.bar-sent.face-active {
+  bottom: 200px;
+}
+.bar-sent.face-other-active {
+  bottom: 53px;
 }
 /*行程*/
 #msg-journey .item, #journey-cost .item {
@@ -411,13 +495,17 @@ textarea {
 }
 /*右侧栏*/
 .menu-right {
-  background: url("../img/03.png") no-repeat center center;
+  background: url("../img/01.png") no-repeat center center;
   background-size: cover;
 }
 .menu-right .item {
   background-color: transparent;
 }
 /*我的*/
+.item-image.item-mid-img img:first-child, .item-image.item-mid-img .list-img {
+  min-width: 120px;
+  width: 60%;
+}
 
 /*行程*/
 #trip .card {

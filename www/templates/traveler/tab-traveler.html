@@ -1,31 +1,16 @@
 <ion-view view-title="果先生" id="guider">
   <ion-content class="padding ">
+    <div class="bar bar-header item-input-inset guider-search-wrap">
+      <label class="item-input-wrapper guider-search">
+        <i class="icon ion-ios-search placeholder-icon light"></i>
+        <input type="search" ng-model="city_name" placeholder="搜索导游" class="ng-pristine ng-valid ng-touched" >
+      </label>
+      <!--<button class="button button-clear button-green">
+        搜索
+      </button>-->
+    </div>
     <ion-slide-box on-slide-changed="" show-pager="true">
       <ion-slide>
-        <div class="bar bar-header item-input-inset guider-search-wrap">
-          <label class="item-input-wrapper guider-search">
-            <i class="icon ion-ios-search placeholder-icon light"></i>
-            <input type="search" ng-model="city_name" placeholder="搜索导游" class="ng-pristine ng-valid ng-touched" >
-          </label>
-          <!--<button class="button button-clear button-green">
-            搜索
-          </button>-->
-        </div>
-        <!--<div ng-click="guiderOpt.searching = true" class="list list-inset guider-search-wrap">
-          <label class="item item-input stable-bg guider-search">
-            <label class="item-input-wrapper">
-              <i class="icon ion-ios-search placeholder-icon"></i>
-              <input type="search" placeholder="搜索">
-            </label>
-            <button class="button button-clear">
-              搜索
-            </button>
-            <label ng-if="!guiderOpt.searching" class="searchTip relative">
-              <i class="icon ion-ios-search h4"></i>
-            &lt;!&ndash;</label>&ndash;&gt;
-            <input type="text" placeholder="搜索">
-          </label>
-        </div>-->
         <div class="list card border-radius10">
           <div class="item guiderCard">
             <div class="text-center padding-top">
@@ -54,32 +39,14 @@
             </div>
           </div>
           <div class="stable-bg text-center brown padding-top padding-bottom">
-            <span class="icon ion-chatbox-working padding5-0"></span> 去交流
+            <span ng-click="chatGuider()">
+              <span class="icon ion-chatbox-working padding5-0"></span> 联系客服
+            </span>
           </div>
         </div>
       </ion-slide>
+
       <ion-slide>
-        <div class="bar bar-header item-input-inset guider-search-wrap">
-          <label class="item-input-wrapper guider-search">
-            <i class="icon ion-ios-search placeholder-icon light"></i>
-            <input type="search" ng-model="city_name" placeholder="" class="ng-pristine ng-valid ng-touched" style="">
-          </label>
-        </div>
-        <!--<div ng-click="guiderOpt.searching = true" class="list list-inset guider-search-wrap">
-          <label class="item item-input stable-bg guider-search">
-            <label class="item-input-wrapper">
-              <i class="icon ion-ios-search placeholder-icon"></i>
-              <input type="search" placeholder="搜索">
-            </label>
-            <button class="button button-clear">
-              搜索
-            </button>
-            <label ng-if="!guiderOpt.searching" class="searchTip relative">
-              <i class="icon ion-ios-search h4"></i>
-            &lt;!&ndash;</label>&ndash;&gt;
-            <input type="text" placeholder="搜索">
-          </label>
-        </div>-->
         <div class="list card border-radius10">
           <div class="item guiderCard">
             <div class="text-center padding-top">
@@ -108,7 +75,9 @@
             </div>
           </div>
           <div class="stable-bg text-center brown padding-top padding-bottom">
-            <span class="icon ion-chatbox-working padding5-0"></span> 去交流
+            <span class="icon ion-chatbox-working padding5-0"></span> 联系客服
+            <!--<button ng-click="testJpush()" class="button button-clear">临时测试推送</button>
+            {{alertContent}}-->
           </div>
         </div>
       </ion-slide>

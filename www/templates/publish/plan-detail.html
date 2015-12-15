@@ -4,7 +4,7 @@
       <label class="item item-icon-left item-input">
         <i class="icon ion-ios-calendar-outline brown"></i>
         <span class="input-label">出发时间</span>
-        <input type="date" class="plan_day_num padding0-5" ng-model="plan.start_date" placeholder="请输入数字">
+        <input type="datetime-local" ng-model="plan.start_date" ng-change="verifyStartDate()" class="plan_day_num padding0-5" placeholder="请输入数字" required>
       </label>
       <label class="item item-input item-icon-left">
         <i class="icon ion-ios-people brown"></i>
@@ -17,7 +17,7 @@
         <div class=" col-90 row list-options">
           <div class="col-34">男桑</div>
           <div class="col-66 text-right">
-            <span ng-if="plan.people_boy > 0">
+            <span ng-show="plan.people_boy > 0">
               <span counter-minus data-model="people_boy" class="icon ion-ios-minus-outline button button-clear"></span>
               <span class="padding0-5">{{plan.people_boy}}人</span>
             </span>
@@ -30,7 +30,7 @@
         <div class=" col-90 row list-options">
           <div class="col-34">女桑</div>
           <div class="col-66 text-right">
-            <span ng-if="plan.people_girl > 0">
+            <span ng-show="plan.people_girl > 0">
               <span counter-minus data-model="people_girl" class="icon ion-ios-minus-outline button button-clear"></span>
               <span class="padding0-5">{{plan.people_girl}}人</span>
             </span>
@@ -43,7 +43,7 @@
         <div class=" col-90 row list-options border0">
           <div class="col-34">小孩纸</div>
           <div class="col-66 text-right">
-            <span ng-if="plan.people_children > 0">
+            <span ng-show="plan.people_children > 0">
               <span counter-minus data-model="people_children" class="icon ion-ios-minus-outline button button-clear"></span>
               <span class="padding0-5">{{plan.people_children}}人</span>
             </span>
@@ -56,16 +56,16 @@
         <i class="icon ion-ios-paperplane-outline brown"></i>出行方式
 
         <span class="item-note green">
-          <select ng-model="plan.way_to_travel" ng-options="way.name for way in wayToTravel" class="border0 green">
+          <select ng-model="plan.way_to_travel" ng-change="wayChange()" ng-options="way.name for way in wayToTravel" class="border0 green">
           </select>
         </span>
         <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
       </div>
-      <div class="row light-bg padding">
+      <div ng-show="plan.people_children > 0" class="row light-bg padding">
         <div class=" col-90 row list-options">
           <div class="col-34">儿童座椅</div>
           <div class="col-66 text-right">
-            <span ng-if="plan.people_children_seat > 0">
+            <span ng-show="plan.people_children_seat > 0">
               <span counter-minus data-model="people_children_seat" class="icon ion-ios-minus-outline button button-clear"></span>
               <span class="padding0-5">{{plan.people_children_seat}}个</span>
             </span>
@@ -78,7 +78,8 @@
   </ion-content>
   <ion-footer-bar>
     <div class="row text-center padding0">
-      <a href="#/tab/publish/{{countryId}}/plan-other" class="col button button-clear button-green">
+      <a href="#/tab/publish/{{countryId}}/plan-other" ng-disabled="!(plan.start_date && (plan.people_boy || plan.people_girl))"
+         class="col button button-clear button-green" ng-class="{'disabled': planOpt.start_date_invalid }">
         下一步
       </a>
     </div>

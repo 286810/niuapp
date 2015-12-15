@@ -1,14 +1,45 @@
-<ion-view view-title="{{country}}">
-  <ion-content class="padding0">
+<ion-view view-title="{{country.dic_value}}">
+  <ion-content class="padding0 stable-bg">
     <div class="margin10-bottom list country-intro padding0">
-      <a ng-repeat="item in destinationCityList" href="#/tab/destination/{{countryId}}/{{item.id}}" class="item border0 item-image margin5-bottom">
-        <img ng-src="{{item.img}}" height="180" >
-        <div class="city-intro-text col">
-          <div class="light ft-bold ft-22 padding-bottom">{{item.name}}</div>
-          <span class="light">有{{item.vistedNum}}个果米去过</span>
+      <div ng-repeat="item in destinationCityList" class="margin10-bottom">
+        <div ng-click="tipsList = !tipsList" class="item border0 item-thumbnail-left item-icon-right">
+          <img ng-src="./img/hotman-2.jpg" >
+          <h2>{{item.dic_value}}</h2>
+          <p class="gray">有33个果先生</p>
+          <i class="ion-ios-arrow-up icon tipsToggle" ng-class="{'active': tipsList, '': !tipsList}"></i>
+          <!--<div class="city-intro-text col"> href="#/tab/destination/{{countryId}}/{{item.id}}"
+            <div class="light ft-bold ft-22 padding-bottom">{{item.dic_value}}</div>
+            <span class="light">有{{item.vistedNum}}个果先生</span>
+          </div>-->
         </div>
-      </a>
-    </div>
+        <div class="tipsList" ng-class="{'active': tipsList, '': !tipsList}">
+          <div class="item border0 item-divider ">
+            果盘列表
+          </div>
+          <div ng-click="openTips()" class="item border0 padding5">
+            <h3 class="padding-left">怎样做一个合格的吃货</h3>
+            <span class="item-note">牛牛 于 2015-12-12</span>
+          </div>
+          <div ng-click="openTips()" class="item border0 padding5">
+            <h3 class="padding-left">怎样做一个合格的吃货</h3>
+            <span class="item-note">牛牛 于 2015-12-12</span>
+          </div>
+        </div>
 
+      </div>
+    </div>
   </ion-content>
 </ion-view>
+
+<script id="tips-modal.html" type="text/ng-template">
+<ion-modal-view>
+  <ion-header-bar>
+
+    <button ng-click="closeTips()" class="button button-clear button-brown">关闭</button>
+    <h1 class="title">怎样做一个合格的吃货</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+    看这里<br>看这里<br>看这里<br>看这里<br>看这里<br>
+  </ion-content>
+</ion-modal-view>
+</script>

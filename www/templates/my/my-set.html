@@ -1,0 +1,33 @@
+<ion-view view-title="设置">
+  <ion-content class="stable-bg">
+    <div class="list">
+      <a href="#/tab/my-account-safe" class="item item-icon-right">
+        账户密码
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </a>
+      <div class="item item-toggle">
+        消息通知
+        <label class="toggle">
+          <input type="checkbox" ng-model="settings.enableNotice">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </div>
+      <!--<ion-toggle  ng-model="settings.enableNotice">
+        消息通知
+      </ion-toggle>-->
+
+      <div ng-click="clearCache()" class="item item-icon-right">
+        清空缓存
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <a href="#/tab/my-about" class="item item-icon-right">
+        关于我们
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </a>
+    </div>
+
+    <button ng-click="exit()" class="button button-green button-block">退出登录</button>
+  </ion-content>
+</ion-view>

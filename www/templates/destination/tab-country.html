@@ -1,20 +1,14 @@
-<ion-view hide-nav-bar="true">
+<ion-view view-title="目的地">
   <ion-content class="padding0">
     <div class="margin10-bottom list country-intro padding0">
-      <a ng-repeat="item in destinationList" href="#/tab/destination/{{item.id}}" class="item border0 item-image margin5-bottom">
-        <img ng-src="{{item.img}}" height="180" >
+      <a ng-repeat="item in destinationList" href="#/tab/destination/{{item}}/city" class="item border0 item-image margin5-bottom">
+        <img ng-src="./img/{{item.dic_key}}.jpg" height="180" >
         <div class="country-intro-text col">
-          <div class="light ft-bold ft-22 padding-bottom">{{item.name}}</div>
-          <span class="light">{{item.text}}</span>
+          <div class="light ft-bold ft-22">{{item.dic_value}}</div>
+          <!--<div class="light ft-bold ft-22 padding-bottom">{{item.dic_value}}</div>-->
+          <!--<span class="light">{{item.text}}</span>-->
         </div>
       </a>
-      <!--<a class="item item-image margin5-bottom">
-        <img ng-src="./img/guider-bg.jpg" >
-        <div class="country-intro-text col">
-          <div class="light ft-bold ft-22 padding-bottom">法国</div>
-          <span class="light">简单的介绍简单的介绍简单的介绍</span>
-        </div>
-      </a>-->
     </div>
   </ion-content>
 </ion-view>

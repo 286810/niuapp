@@ -5,15 +5,15 @@ navigation history that also transitions its views in and out.
 -->
 <ion-tabs ng-class="{ 'tabs-item-hide': root.hideTabs }" class="tabs-icon-top tabs-stable tabs-color-active-green">
 
-  <ion-tab title="<h4>果</h4>果先生" class="gray guider-tab light-bg" href="#/tab/dash">
-    <ion-nav-view name="tab-guider"></ion-nav-view>
+  <ion-tab title="<h4>果</h4>果先生" class="gray guider-tab light-bg" href="#/tab/traveler">
+    <ion-nav-view name="tab-traveler"></ion-nav-view>
   </ion-tab>
 
   <ion-tab title="目的地" class="gray light-bg" icon-off="ion-ios-location-outline" icon-on="ion-ios-location" href="#/tab/destination">
     <ion-nav-view name="tab-destination"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="<h5>发布</h5><h5>行程</h5>" class="light-bg publish-tab" href="#/tab/publish">
+  <ion-tab title="<h5>发布</h5><h5>行程</h5>" class="light-bg publish-tab" href="#/tab/publish" on-select="initPublishView()">
     <ion-nav-view name="tab-publish"></ion-nav-view>
   </ion-tab>
 

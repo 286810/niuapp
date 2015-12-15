@@ -6,17 +6,11 @@
       </div>
       <div class="text-center padding-right">
         <div class="width-33 place-left relative padding-left padding-top">
-          <span ng-click="addPlanImg()" class="button button-clear button-green add-plan-img">添加<br>图片</span>
+          <span upload-imgs data-model="plan" data-role="note_img" class="button button-clear button-green add-plan-img">添加<br>图片</span>
         </div>
-        <!--<img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >
-        <img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >
-        <img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >-->
-        <!--<div class="col-50 place-left ">
-          <img class="col-90" ng-src="./img/guider.png" >
-        </div>
-        <div class="col-50 place-left text-center">
-          <img class="col-90" ng-src="./img/guider.png" >
-        </div>-->
+        <img ng-repeat="item in plan.note_img" class="col-33 place-left padding-left padding-top" src="{{item}}" >
+        <!--<img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >-->
+        <!--<img class="col-33 place-left padding-left padding-top" ng-src="./img/guider.png" >-->
       </div>
     </div>
   </ion-content>

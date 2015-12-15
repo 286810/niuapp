@@ -9,7 +9,7 @@
     </div>
 
     <div class="padding">
-      <a href="#/tab/guider" class="button button-block button-green">完成</a>
+      <button ng-click="finishTag()" ng-class="{'disabled': !traveler.tags.length}" class="button button-block button-green">完成</button>
     </div>
   </ion-content>
 </ion-view>

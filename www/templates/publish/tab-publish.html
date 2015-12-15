@@ -1,12 +1,13 @@
-<ion-view hide-nav-bar="true">
-  <ion-content class="padding0">
-    <div class="margin10-bottom list country-intro padding0">
-      <a ng-repeat="item in destinationList" href="#/tab/publish/{{item.id}}" class="item border0 item-image margin5-bottom">
+<ion-view view-title="选择国家">
+  <ion-content class="padding0 stable-bg">
+    <div class="margin10-bottom margin5-top list country-intro padding0">
+      <a ng-repeat="item in destinationList" href="#/tab/publish/{{item.id}}"
+         class="item stable-bg border0 item-thumbnail-left">
         <img ng-src="{{item.img}}" height="180" >
-        <div class="country-intro-text col">
-          <div class="light ft-bold ft-22 padding-bottom">{{item.name}}</div>
-          <span class="light">{{item.text}}</span>
-        </div>
+        <h2>{{item.name}}</h2>
+        <h2 class="gray">japan</h2>
+        <!--<p class="gray ft-12">{{item.text}}</p>-->
+        <p class="gray">有333个果宝去过</p>
       </a>
     </div>
   </ion-content>
