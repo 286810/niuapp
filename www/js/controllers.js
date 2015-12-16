@@ -1,9 +1,9 @@
 angular.module('starter.controllers', [])
 
   .controller('MainCtrl', ['$scope', '$state', '$location', '$ionicModal', '$ionicNavBarDelegate', '$ionicHistory', '$ionicLoading',
-    '$ionicSideMenuDelegate', '$localStorage', '$ionicPopup', '$ionicPlatform', 'RootService',
+    '$ionicSideMenuDelegate', '$localStorage', '$ionicPopup', '$ionicPlatform', 'RootService', '$http', 'Host', 'Headers', 'Chats',
     function ($scope, $state, $location, $ionicModal, $ionicNavBarDelegate, $ionicHistory, $ionicLoading, $ionicSideMenuDelegate,
-              $localStorage, $ionicPopup, $ionicPlatform, RootService) {
+              $localStorage, $ionicPopup, $ionicPlatform, RootService, $http, Host, Headers, Chats) {
 
       //状态变量
       $scope.root = {};
@@ -12,52 +12,11 @@ angular.module('starter.controllers', [])
       var login = $localStorage.get('uId');//登录ID
       var password = $localStorage.get('ps');//登录密码
 
-      function onConnect(status) {
-        if (status == Strophe.Status.CONNECTING) {
-          console.log('Strophe is connecting.');
-        } else if (status == Strophe.Status.CONNFAIL) {
-          console.log('Strophe failed to connect.');
-        } else if (status == Strophe.Status.DISCONNECTING) {
-          console.log('Strophe is disconnecting.');
-        } else if (status == Strophe.Status.DISCONNECTED) {
-          console.log('Strophe is disconnected.');
-        } else if (status == Strophe.Status.CONNECTED || status === Strophe.Status.ATTACHED) {
-          console.log('Strophe is connected.');
-          //connection.disconnect();
-          console.log('ECHOBOT: Send a message to ' + connection.jid + ' to talk to me.');
-
-          RootService.opt.connection.addHandler(onMessage, null,    'message', null, null,  null);
-          console.log('onMessage.');
-          RootService.opt.connection.send($pres().tree());
-          console.log('send.');
-        }
-      }
-
-      function onMessage(msg) {
-        console.log("----------------------recevie  message----------------------"+msg.getAttribute('body'), msg);
-        var to = msg.getAttribute('to');
-        var from = msg.getAttribute('from');
-        var type = msg.getAttribute('type');
-        var elems = msg.getElementsByTagName('body');
-        //console.log(to, from, type, elems[0]);
-
-        if (type == "chat" && elems.length > 0) {
-          var body = elems[0];
-
-          var d = new Date();
-          d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
-
-
-          messagerev(Strophe.getText(body),from);
-        }
-        console.log('before return ...');
-        return true;
-      }
-
-      function messagerev(msg,from) {
+      $scope.messageRev = function(msg,from) {
+        console.log('before push'+msg );
         var d = new Date();
         d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
-        console.log('before push'+msg, d.toLocaleTimeString());
+        //如接到消息就弹出
         var pop = $ionicPopup.alert({
           title: "chat receive:"+msg,
           scope: $scope
@@ -88,9 +47,45 @@ angular.module('starter.controllers', [])
         //window.plugins.jPushPlugin.clearAllNotification();
         //$ionicScrollDelegate.resize();
         //$ionicScrollDelegate.scrollBottom(true);
+      };
+
+      function onConnect(status) {
+        if (status == Strophe.Status.CONNECTING) {
+          console.log('Strophe is connecting.');
+        } else if (status == Strophe.Status.CONNFAIL) {
+          console.log('Strophe failed to connect.');
+        } else if (status == Strophe.Status.DISCONNECTING) {
+          console.log('Strophe is disconnecting.');
+        } else if (status == Strophe.Status.DISCONNECTED) {
+          console.log('Strophe is disconnected.');
+        } else if (status == Strophe.Status.CONNECTED || status === Strophe.Status.ATTACHED) {
+          console.log('Strophe is connected.');
+          //connection.disconnect();
+          console.log('ECHOBOT: Send a message to ' + RootService.opt.connection.jid + ' to talk to me.');
+
+          RootService.opt.connection.addHandler(onMessage, null,    'message', null, null,  null);
+          console.log('onMessage.');
+          RootService.opt.connection.send($pres().tree());
+          console.log('send.');
+        }
       }
 
+      function onMessage(msg) {
+        console.log("-----------receive  message-------------"+  msg.getElementsByTagName('body')[0].innerHTML, msg);
+        var to = msg.getAttribute('to');
+        var from = msg.getAttribute('from');
+        var type = msg.getAttribute('type');
+        var elems = msg.getElementsByTagName('body');
+        //console.log(to, from, type, Strophe.getText(elems[0]));
 
+        if (type == "chat" && elems.length > 0) {
+          var body = elems[0];
+
+          $scope.messageRev(Strophe.getText(body),from);
+          console.log('messageRev ...' + '');
+        }
+        return true;
+      }
 
       //启动推送服务
       function initJpush() {
@@ -109,10 +104,6 @@ angular.module('starter.controllers', [])
 
           RootService.data.pushTripId = $scope.alertContent.match(/TRIP\d{16}/)[0];
 
-          var popup = $ionicPopup.alert({
-            title: 'receiveNotification: tripId-' + RootService.data.pushTripId,
-            scope: $scope
-          });
           if($state.current.name == 'tab.chat-detail') {
             //window.plugins.jPushPlugin.clearAllNotification();
           } else {
@@ -138,11 +129,29 @@ angular.module('starter.controllers', [])
             scope: $scope
           });
 
-          if($state.current.name == 'tab.chat-detail') {
+          $http({
+            method: 'GET',
+            url: Host + '/trips/' + RootService.data.pushTripId,
+            headers: Headers
+          }).success(function (data, status) {
+            console.log(data, status);
+            $state.go('tab.chat-detail', {chatId: data[0].trips_sir});
+            Chats.add({
+              id: '0086_18611726992_0',
+              name: '反省者',
+              lastText: '范冰冰叫你回家吃饭',
+              face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
+              'pos': 'left',
+              time: new Date().getTime()
+            });
+          }).error(function (data, status) {
+            console.log(data,status);
+          });
+          /*if($state.current.name == 'tab.chat-detail') {
             //window.plugins.jPushPlugin.clearAllNotification();
 
           } else {
-          }
+          }*/
 
           //判断行程状态
           $http({
@@ -167,12 +176,13 @@ angular.module('starter.controllers', [])
       $ionicPlatform.ready(function () {
         if( $localStorage.get('uId') ) {
           initJpush();
-
-          //启动openFire
-          RootService.opt.connection = new Strophe.Connection(BOSH_SERVICE);
-          RootService.opt.connection.connect(login+'@'+host,password, onConnect);
         }
       });
+      //启动openFire
+      if( $localStorage.get('uId') ) {
+        RootService.opt.connection = new Strophe.Connection(BOSH_SERVICE);
+        RootService.opt.connection.connect(login+'@'+host,password, onConnect);
+      }
 
       //接收子控制器事件
       $scope.$on('initJpush', function () {
@@ -180,8 +190,8 @@ angular.module('starter.controllers', [])
       });
       $scope.$on('initOpenFire', function () {
         //启动openFire
-        connection = new Strophe.Connection(BOSH_SERVICE);
-        connection.connect(login+'@'+host,password, onConnect);
+        RootService.opt.connection = new Strophe.Connection(BOSH_SERVICE);
+        RootService.opt.connection.connect(login+'@'+host,password, onConnect);
       });
 
       $scope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
@@ -437,26 +447,6 @@ angular.module('starter.controllers', [])
           }, 1500);
         }
       };
-      //临时注册果先生
-      /*$scope.register_sir = function () {
-        var data = {
-          user_id: $scope.traveler.country_code + '_' + $scope.traveler.phone + '_1',
-          user_country_code: $scope.traveler.country_code ,
-          user_phone: $scope.traveler.phone,
-          user_role: '1',
-          userPassword: $scope.traveler.password
-        };
-        $http({
-          method: 'POST',
-          url: Host + '/user',
-          data: data,
-          headers: Headers
-        }).success(function (data, status, headers, config) {
-          console.log(data, status);
-        }).error(function (data, status, headers, config) {
-          console.log(data, status);
-        });
-      };*/
       //登录
       $scope.login = function (loginForm) {
         console.log();
@@ -687,8 +677,8 @@ angular.module('starter.controllers', [])
   }])
   .controller('DestinationCityCtrl', ['$scope', '$stateParams', '$http', 'Host', 'Headers', '$ionicModal',
     function ($scope, $stateParams, $http, Host, Headers, $ionicModal) {
+      console.log($stateParams.countryId);
       $scope.country = JSON.parse($stateParams.countryId);
-      console.log($scope.country.dic_key);
       //目的地城市数据
       $http({
         method: 'POST',
@@ -748,6 +738,21 @@ angular.module('starter.controllers', [])
       $scope.plan.title = [];
       $scope.plan.img = [];
 
+      //国家数据
+      $http({
+        method: 'POST',
+        url: Host + '/common/dic/country_world',
+        headers: Headers
+      }).success(function (data, status) {
+        angular.forEach(data, function (val, key) {
+          val.dic_name = val.dic_key.split('_')[1];
+        });
+        console.log(data, status);
+        $scope.destinationList = data;
+      }).error(function (data, status) {
+        console.log(data, status);
+      });
+
       //接收城市数据
       $scope.$on('cityChange', function (e, city) {
         $scope.plan.city = city.name;console.log($scope.plan);
@@ -771,19 +776,6 @@ angular.module('starter.controllers', [])
         // $scope.plan.title = [];
         $scope.plan.title_str = $scope.plan.title.join('、');
       });
-
-
-      $scope.destinationList = [
-        {
-          id: 'japan', name: '日本', text: '春观夜樱、夏看碧海、秋见红叶、冬踏落雪', img: './img/japan.jpg'
-        },
-        {
-          id: 'france', name: '法国', text: '在花都巴黎感受万种风情', img: './img/france.jpg'
-        },
-        {
-          id: 'spain', name: '西班牙', text: '气候温和，山青水秀，阳光明媚，风景绮丽', img: './img/spain.jpg'
-        }
-      ];
 
       //跳到添加城市页
       $scope.addCity = function () {
@@ -906,10 +898,8 @@ angular.module('starter.controllers', [])
 
   .controller('MessageCtrl', function ($scope, Chats) {
 
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
+    // when view are recreated or on app start, instead of every page change. To listen for when this page is active
+    // (for example, to refresh data), listen for the $ionicView.enter event:
     $scope.$on('$ionicView.enter', function(e, data) {
       console.log(e, data);
     });
@@ -1168,7 +1158,11 @@ angular.module('starter.controllers', [])
         $http({
           method: 'POST',
           url: Host + '/trips/' + $localStorage.get('uId') + '/query',
-          headers: Headers
+          headers: {
+            access_token: 'test123',
+            currentpage: 1,
+            pagesize: 10
+          }
         }).success(function (data, status) {
           console.log(data, status);
           angular.forEach(data.data, function (val, key) {

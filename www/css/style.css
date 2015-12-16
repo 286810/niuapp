@@ -322,6 +322,10 @@ div[contenteditable="true"] {
 }
 
 /*发布*/
+.item-thumbnail-left > .niu_thumbnail_img, .item-thumbnail-left .niu_thumbnail_img,
+.item-thumbnail-left .item-content > .niu_thumbnail_img, .item-thumbnail-left .item-content .niu_thumbnail_img {
+  max-height: 60px !important;
+}
 .plan_day_num {
   color: #96c2a0 !important;
   text-align: right;

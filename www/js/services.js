@@ -13,38 +13,17 @@ angular.module('starter.services', [])
 
     // Some fake testing data
     var chats = [{
-      id: '0086_18611726992_0',
-      name: '反省者',
-      lastText: '范冰冰叫你回家吃饭',
-      face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
-      'pos': 'left',
-      time: new Date().getTime()
-    }, {
-      id: '0086_18810938510_1',
-      name: 'Jason',
+      id: '0086_18810938510_0',
+      name: '牛牛',
       lastText: 'Baby 叫你洗衣服',
       face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       'pos': 'left',
       time: new Date().getTime()
-    }, {
-      id: 2,
-      name: '周杰伦',
-      lastText: '昆凌叫你抱孩子',
-      face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg',
-      'pos': 'left',
-      time: new Date().getTime()
-    }, {
-      id: 3,
-      name: '汪峰',
-      lastText: '章子怡等着你哦!',
-      face: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
-      'pos': 'left',
-      time: new Date().getTime()
-    }, {
-      id: 4,
-      name: '王思聪',
-      lastText: '老公虐我千百遍，我待老公如初恋！',
-      face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
+    },{
+      id: '0086_18810938510_1',
+      name: 'Jason',
+      lastText: 'Baby 叫你洗衣服',
+      face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       'pos': 'left',
       time: new Date().getTime()
     }];
@@ -52,6 +31,9 @@ angular.module('starter.services', [])
     return {
       all: function() {
         return chats;
+      },
+      add: function (trip_sir) {
+        chats.push(trip_sir);
       },
       remove: function(chat) {
         chats.splice(chats.indexOf(chat), 1);

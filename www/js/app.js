@@ -7,6 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'directives'])
 
+  .constant('Token', 'test123')
   .constant('Headers', {access_token: 'test123'})
   .constant('Host', 'http://www.ocdday.com:9999')
 
