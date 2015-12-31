@@ -1,20 +1,33 @@
 <ion-view hide-nav-bar="true" id="msg-journey">
   <ion-header-bar>
     <div class="buttons">
-      <button ng-click="back()" class="button button-clear icon ion-ios-arrow-back"></button>
+      <button ng-click="back()" class="button button-clear">
+        <i class="icon ion-ios-arrow-back"></i>
+      </button>
     </div>
     <h1 class="title"></h1>
     <div class="buttons">
-      <button class="button button-clear button-balanced">拒绝行程</button>
+      <button ng-click='refuseTrip("{{tripId}}")' class="button button-clear button-balanced">拒绝行程</button>
     </div>
   </ion-header-bar>
   <ion-content class="stable-bg">
     <div class="row">
       <div class="col-10 time-line"></div>
       <div class="list col-90">
-        <div>
+        <div ng-repeat="plan in trips_plan">
           <div class="item border0 padding item-divider stable-bg">
-            <h2 class="journey-date padding-left">第一天</h2>
+            <h2 class="journey-date padding-left">第 {{plan.billkey}} 站：{{plan.eventtitle}}</h2>
+          </div>
+          <div class="item border0 item-avatar plan_detail">
+            <img class="scenery-img" ng-src="./img/pig-header.png">
+            <p class="scenery-intro padding-left">时间：{{plan.stime}} - {{plan.overtime}}</p>
+            <p class="scenery-intro padding-left">地点：{{plan.eventplace}}</p>
+            <p class="scenery-intro padding-left">描述：{{plan.eventdesc}}</p>
+          </div>
+        </div>
+        <!--<div>
+          <div class="item border0 padding item-divider stable-bg">
+            <h2 class="journey-date padding-left">第 2 站</h2>
           </div>
           <div class="item border0 item-avatar">
             <img class="scenery-img" ng-src="./img/hotman-2.jpg">
@@ -23,48 +36,24 @@
             </h3>
             <p class="scenery-intro padding-left">地点大致介绍</p>
           </div>
-        </div>
-        <div>
-          <div class="item border0 padding item-divider stable-bg">
-            <h2 class="journey-date padding-left">第二天</h2>
-          </div>
-          <div class="item border0 item-avatar">
-            <img class="scenery-img" ng-src="./img/hotman-2.jpg">
-            <h3 class="journey-topic gray">
-              09:00 <span class="padding-left">去喜马拉雅山</span>
-            </h3>
-            <p class="scenery-intro padding-left">地点大致介绍</p>
-          </div>
-        </div>
-        <div>
-          <div class="item border0 padding item-divider stable-bg">
-            <h2 class="journey-date padding-left">第三天</h2>
-          </div>
-          <div class="item border0 item-avatar">
-            <img class="scenery-img" ng-src="./img/hotman-2.jpg">
-            <h3 class="journey-topic gray">
-              09:00 <span class="padding-left">去喜马拉雅山</span>
-            </h3>
-            <p class="scenery-intro padding-left">地点大致介绍</p>
-          </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </ion-content>
 
   <div class="journey-cost row padding light-bg">
-    <div class="col-50">
+    <!--<div class="col-50">
       费用总计 <span class="assertive h4">￥8888</span>
-    </div>
-    <div class="col-50 text-right ">
-      <a href="#/tab/journey-cost-detail" class="gray">
+    </div>-->
+    <div class="col-50 text-left ">
+      <a href="#/tab/journey-cost-detail/{{tripId}}" class="gray">
         费用详情
       </a>
     </div>
   </div>
   <div class="bar bar-footer bar-green">
     <div class="title padding5-0">
-      <a href="#/tab/journey-confirm" class="button button-clear">确认我的行程</a>
+      <a href="#/tab/journey-confirm/{{tripId}}" class="button button-clear">确认我的行程</a>
     </div>
   </div>
 </ion-view>

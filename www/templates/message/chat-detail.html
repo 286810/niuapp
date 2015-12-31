@@ -22,11 +22,13 @@
           </div>
         </div>
       </div>
-      <div ng-repeat="item in chatData" class="item " ng-class="{ 'item-thumbnail-left': item.pos=='left', 'item-thumbnail-right': item.pos=='right'}">
+      <div ng-repeat="item in chatData track by $index" class="item " ng-class="{ 'item-thumbnail-left': item.pos=='left', 'item-thumbnail-right': item.pos=='right'}">
         <img ng-if="!item.content_push" class="header" ng-src="{{item.face}}" >
         <!--<h2>小红</h2>-->
-        <p ng-if="!item.content_push" class="padding-top" ng-class="{ 'place-right': item.pos=='right', 'place-left': item.pos=='left' }">
-          <h6 class="gray text-right">{{item.time}}</h6>
+        <h6 class="gray padding-top" ng-class="{ 'text-right': item.pos=='right', 'text-left': item.pos=='left', 'text-center': item.pos=='center' }">
+          {{item.time | date:'MM-dd HH:mm'}}
+        </h6>
+        <p ng-if="!item.content_push" class="" ng-class="{ 'place-right': item.pos=='right', 'place-left': item.pos=='left' }">
           <span class="content-box" ng-class="{ 'place-right': item.pos=='right', 'place-left': item.pos=='left',
             'stable-bg': item.pos=='right', 'green-bg': item.pos=='left'}">
             <span ng-if="item.type != 'upload'" ng-repeat="it in item.content track by $index" class="content-wrap">
@@ -37,9 +39,9 @@
             <img ng-show="item.type == 'upload'" src="{{item.img}}" width="320" />
           </span>
         </p>
-        <div ng-if="item.content_push" ng-click="lookJourney(item.tripId)" class="button button-clear button-brown ft-12 button-full padding margin20-top">
+        <p ng-if="item.content_push" ng-click="lookJourney(item.tripId)" class="brown text-center ft-12 padding">
           {{item.content_push}}
-        </div>
+        </p>
       </div>
 
 

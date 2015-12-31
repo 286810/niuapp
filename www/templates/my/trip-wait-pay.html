@@ -7,9 +7,9 @@
     </div>
   </ion-header-bar>
   <ion-content class="padding stable-bg">
-    <div class="list stable-bg margin0">
+    <!--<div class="list stable-bg margin0">
       <div class="item stable-bg item-icon-left border0">
-        <span class="icon ion-ios-checkmark balanced"></span>
+        <span class="icon ion-ios-checkmark green"></span>
         <span class="ft-bold">东京大阪北海道10日游</span>
       </div>
       <div class="item ft-14">
@@ -20,12 +20,44 @@
         <span>人数</span>
         <span class="item-note dark"> 4人 </span>
       </div>
+    </div>-->
+    <div class="list stable-bg margin0">
+      <div class="item stable-bg border0">
+        <span class="list-head padding-left">行程详情</span>
+      </div>
+    </div>
+    <div class="list card stable-bg margin0">
+      <div class="item ft-14">
+        <span>出发时间</span>
+        <span class="item-note dark"> {{tripData.trips_leavetime}} </span>
+      </div>
+      <div class="item ft-14">
+        <span>男桑</span>
+        <span class="item-note dark"> {{tripData.trips_boy}}人 </span>
+      </div>
+      <div class="item ft-14">
+        <span>女桑</span>
+        <span class="item-note dark"> {{tripData.trips_girl}}人 </span>
+      </div>
+      <div class="item ft-14">
+        <span>小孩纸</span>
+        <span class="item-note dark"> {{tripData.trips_child}}人 </span>
+      </div>
+    </div>
+
+    <div class="list card stable-bg">
+      <div ng-repeat="item in tripData.trips_dest" class="item ft-14">
+        <span>{{item.city}} / {{item.daynum}}天</span>
+        <span class="item-note dark" >
+          {{item.title}}
+        </span>
+      </div>
     </div>
   </ion-content>
 
   <div class="journey-cost row padding light-bg">
     <div class="col-50">
-      本行程费用 <span class="assertive h4">￥8888</span>
+      本行程费用 <span class="assertive h4">￥{{bill_total}}</span>
     </div>
     <div class="col-50 text-right ">
       <a href="#/tab/my-trip" class="gray">
@@ -35,7 +67,7 @@
   </div>
   <ion-footer-bar class=" bar-green">
     <div class="title padding5-0">
-      <button class="button button-clear">去支付宝付款</button>
+      <button ng-click="toPay()" class="button button-clear">去支付宝付款</button>
     </div>
   </ion-footer-bar>
 </ion-view>

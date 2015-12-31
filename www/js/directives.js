@@ -129,8 +129,8 @@ directives.directive( 'uploadImgs', [ '$ionicActionSheet', '$ionicGesture', func
                 sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 120,
-                targetHeight: 200,
+                targetWidth: 200,
+                targetHeight: 120,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
               })
@@ -142,8 +142,8 @@ directives.directive( 'uploadImgs', [ '$ionicActionSheet', '$ionicGesture', func
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 120,
-                targetHeight: 200,
+                targetWidth: 200,
+                targetHeight: 120,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
               })
@@ -225,9 +225,21 @@ directives.directive( 'msgUploadImg', [ '$ionicActionSheet', '$ionicGesture', '$
   };
 }]);
 
-directives.directive( 'showUpImg', [ '$ionicGesture', function ( $ionicGesture ) {
+//显示果盘列表
+directives.directive( 'showTipsList', [ '$ionicGesture', '$http', 'Host', 'Headers', function ($ionicGesture, $http, Host, Headers) {
 
   return function (scope, elem, attr) {
+    $ionicGesture.on('tap', function (e) {
+      if(!scope.tipsList) {
+        console.log(!scope.tipsList);
+        /*$http({
 
+        }).success(function (data, status) {
+
+        }).error(function (data, status) {
+
+        });*/
+      }
+    }, elem);
   }
 }]);

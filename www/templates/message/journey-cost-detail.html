@@ -14,29 +14,32 @@
       <div class="list col-90">
         <div>
           <div class="item border0 padding item-divider stable-bg">
-            <h2 class="journey-date padding-left">
-              <span>2015-06-09</span>
-              <span class="padding-left">第一天</span>
-              <span class="padding-left"> 东京 </span>
+            <h2 ng-repeat="bill in trips_bill.bill_detial" class="journey-date padding-left">
+              <!--<span>2015-06-09</span>-->
+              <span class="padding-left">第 {{bill.billkey}} 站：{{bill.cost}}</span>
+              <!--<span class="padding-left"> 东京 </span>-->
             </h2>
           </div>
-          <div class="item border0 padding0 text-center">
+          <div class="item border0 padding item-divider stable-bg">
+            <h2 class="journey-date padding-left">
+              <span class="padding-left">服务费：500</span>
+            </h2>
+          </div>
+          <!--<div class="item border0 padding0 text-center">
             <div class="row">
-              <span class="col">车费</span>
-              <span class="col">餐费</span>
-              <span class="col">住宿费</span>
+              <span class="col">行程费</span>
+              <span class="col">服务费</span>
               <span class="col">合计</span>
             </div>
             <div class="row journey-price">
-              <span class="col">200</span>
-              <span class="col">100</span>
-              <span class="col">300</span>
-              <span class="col">600</span>
+              <span class="col">{{bill.cost}}</span>
+              <span class="col">500</span>
+              <span class="col" ng-bind="bill.cost+500"></span>
             </div>
-          </div>
+          </div>-->
         </div>
 
-        <div>
+        <!--<div>
           <div class="item border0 padding item-divider stable-bg">
             <h2 class="journey-date padding-left">
               <span>2015-06-10</span>
@@ -58,43 +61,19 @@
               <span class="col">600</span>
             </div>
           </div>
-        </div>
-
-        <div>
-          <div class="item border0 padding item-divider stable-bg">
-            <h2 class="journey-date padding-left">
-              <span>2015-06-11</span>
-              <span class="padding-left">第三天</span>
-              <span class="padding-left"> 东京 </span>
-            </h2>
-          </div>
-          <div class="item border0 padding0 text-center">
-            <div class="row">
-              <span class="col">车费</span>
-              <span class="col">餐费</span>
-              <span class="col">住宿费</span>
-              <span class="col">合计</span>
-            </div>
-            <div class="row journey-price">
-              <span class="col">200</span>
-              <span class="col">100</span>
-              <span class="col">300</span>
-              <span class="col">600</span>
-            </div>
-          </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </ion-content>
 
   <div class="journey-cost row padding light-bg">
     <div class="col-50">
-      费用总计 <span class="assertive h4">￥8888</span>
+      费用总计 <span class="assertive h4">￥{{trips_bill.bill_total}}</span>
     </div>
   </div>
   <div class="bar bar-footer bar-balanced">
     <div class="title padding5-0">
-      <a href="#/tab/journey-confirm" class="button button-clear">确认我的行程</a>
+      <a href="#/tab/journey-confirm/{{tripId}}" class="button button-clear">确认我的行程</a>
     </div>
   </div>
 </ion-view>

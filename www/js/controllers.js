@@ -2,8 +2,9 @@ angular.module('starter.controllers', [])
 
   .controller('MainCtrl', ['$scope', '$state', '$location', '$ionicModal', '$ionicNavBarDelegate', '$ionicHistory', '$ionicLoading',
     '$ionicSideMenuDelegate', '$localStorage', '$ionicPopup', '$ionicPlatform', 'RootService', '$http', 'Host', 'Headers', 'Chats',
+    '$timeout',
     function ($scope, $state, $location, $ionicModal, $ionicNavBarDelegate, $ionicHistory, $ionicLoading, $ionicSideMenuDelegate,
-              $localStorage, $ionicPopup, $ionicPlatform, RootService, $http, Host, Headers, Chats) {
+              $localStorage, $ionicPopup, $ionicPlatform, RootService, $http, Host, Headers, Chats, $timeout) {
 
       //状态变量
       $scope.root = {};
@@ -14,20 +15,28 @@ angular.module('starter.controllers', [])
 
       $scope.messageRev = function(msg,from) {
         console.log('before push'+msg );
-        var d = new Date();
-        d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
+        var timeStamp = new Date();
+        //如果在后台提示有消息
+        if($state.current.name == 'tab.chat-detail') {
+          $scope.root.hadNewMsg = false;
+        } else {
+          $scope.root.hadNewMsg = true;
+        }
         //如接到消息就弹出
         var pop = $ionicPopup.alert({
           title: "chat receive:"+msg,
           scope: $scope
         });
-
+        $timeout(function () {
+          pop.close();
+        }, 5000);
         if(/\[TRIP\d{16}\]/.test(msg)) {
           //是系统通知
           RootService.chatData.push({
             'tripId': msg.match(/TRIP\d{16}/)[0],
             'content_push': msg,
-            'time': d
+            'pos': 'center',
+            'time': timeStamp.getTime()
           });
         } else {
           RootService.chatData.push({
@@ -36,12 +45,18 @@ angular.module('starter.controllers', [])
             'face': './img/hotman-1.png',
             'pos': 'left',
             'content': msg.replace(/\[图片/g, './img/face/').replace(/\]/g, '.gif').split(' '),
-            'time': d
+            'time': timeStamp.getTime()
           });
         }
 
-        console.log(RootService.chatData);
-        $scope.$apply();
+        console.log(RootService.chatData, $scope.root);
+        var lastChatData = RootService.chatData[RootService.chatData.length-1];
+        if(lastChatData && timeStamp.getTime() > lastChatData.time && timeStamp.getDate() > new Date(lastChatData.time).getDate()) {
+          //只保留当天的聊天数据
+          $localStorage.setObject(from.split('@')[0], []);
+        } else {
+          $localStorage.setObject(from.split('@')[0], RootService.chatData);
+        }
 
         //聊天页不提示
         //window.plugins.jPushPlugin.clearAllNotification();
@@ -94,82 +109,132 @@ angular.module('starter.controllers', [])
         //window.plugins.jPushPlugin.setDebugMode(true);
 
         //打开推送内容
-        document.addEventListener('jpush.receiveNotification', function (e) {
+        document.addEventListener("jpush.receiveNotification", function (e) {
 
+          var alertContent;
           if(device.platform == "Android"){
-            $scope.alertContent=window.plugins.jPushPlugin.receiveNotification.alert;
+            alertContent=window.plugins.jPushPlugin.receiveNotification;
           }else{
-            $scope.alertContent   = event.aps.alert;
+            alertContent   = e.aps;
           }
+          var popup = $ionicPopup.alert({
+            template: 'receiveNotification: ' + JSON.stringify(alertContent),
+            scope: $scope
+          });
+          $timeout(function () {
+            popup.close();
+          }, 50000);
 
-          RootService.data.pushTripId = $scope.alertContent.match(/TRIP\d{16}/)[0];
-
-          if($state.current.name == 'tab.chat-detail') {
+           /*if($state.current.name == 'tab.chat-detail') {
             //window.plugins.jPushPlugin.clearAllNotification();
           } else {
-            /*var popup = $ionicPopup.alert({
-              title: "receive:"+$scope.alertContent,
-              scope: $scope
-            });*/
+
           }
+          var extraInfo = alertContent.extras['cn.jpush.android.EXTRA'];
+          if(extraInfo.type == 'syschat') {
+            //是系统通知
+            RootService.chatData.push({
+              'tripId': alertContent.alert.match(/TRIP\d{16}/)[0],
+              'content_push': alertContent.alert,
+              'pos': 'center',
+              'time': d
+            });
+          } else if(extraInfo.type == 'newchat') {
+            RootService.chatData.push({
+              'userId': extraInfo.from,
+              'name': extraInfo.from,
+              'face': './img/hotman-1.png',
+              'pos': 'left',
+              'content': alertContent.alert.replace(/\[图片/g, './img/face/').replace(/\]/g, '.gif').split(' '),
+              'time': d
+            });
+          }*/
 
         }, false);
 
         document.addEventListener('jpush.openNotification', function (e) {
 
           if(device.platform == "Android"){
+            $scope.pushContent=window.plugins.jPushPlugin.openNotification;
             $scope.alertContent=window.plugins.jPushPlugin.openNotification.alert;
           }else{
-            $scope.alertContent   = event.aps.alert;
+            $scope.pushContent   = e.aps;
+            $scope.alertContent   = e.aps.alert;
           }
-          RootService.data.pushTripId = $scope.alertContent.match(/TRIP\d{16}/)[0];
 
-          var popup = $ionicPopup.alert({
-            title: 'openNotification: tripId-' + RootService.data.pushTripId,
-            scope: $scope
-          });
-
-          $http({
-            method: 'GET',
-            url: Host + '/trips/' + RootService.data.pushTripId,
-            headers: Headers
-          }).success(function (data, status) {
-            console.log(data, status);
-            $state.go('tab.chat-detail', {chatId: data[0].trips_sir});
-            Chats.add({
-              id: '0086_18611726992_0',
-              name: '反省者',
-              lastText: '范冰冰叫你回家吃饭',
-              face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
-              'pos': 'left',
-              time: new Date().getTime()
+          if(extraInfo.type == 'syschat') {
+            //得到行程单号
+            RootService.data.pushTripId = $scope.alertContent.match(/TRIP\d{16}/)[0];
+            var extraInfo = $scope.pushContent.extras['cn.jpush.android.EXTRA'];
+            //行程推送
+            var popup = $ionicPopup.alert({
+              template: 'openNotification: <br>from-' + extraInfo.from +
+              '<br>trip_status:' + extraInfo.trip_status +
+              '<br>type:' + extraInfo.type,
+              scope: $scope
             });
-          }).error(function (data, status) {
-            console.log(data,status);
-          });
+            $timeout(function () {
+             popup.close();
+             }, 12000);
+            //是系统通知
+            RootService.chatData.push({
+              'tripId': RootService.data.pushTripId,
+              'content_push': $scope.alertContent,
+              'pos': 'center',
+              'time': d
+            });
+
+            $localStorage.setObject(extraInfo.from, RootService.chatData);
+            $http({
+              method: 'GET',
+              url: Host + '/user/' + extraInfo.from,
+              headers: Headers
+            }).success(function (data, status) {
+              //添加新的果先生
+              Chats.add({
+                id: extraInfo.from,
+                name: data.nickname || '',
+                lastText: '范冰冰叫你回家吃饭',
+                face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
+                pos: 'left',
+                time: new Date().getTime()
+              });
+              $localStorage.setObject('niuSir_' + extraInfo.from, data);
+            }).error(function (data, status) {
+
+            });
+
+            //跳到聊天页
+            $state.go('tab.chat-detail', {chatId: extraInfo.from});
+            //判断行程状态
+            /*$http({
+              method: 'GET',
+              url: Host + '/trips/' + RootService.data.pushTripId,
+              headers: Headers
+            }).success(function (data, status) {
+              console.log(data, status);
+            }).error(function (data, status) {
+              console.log(data,status);
+            });*/
+          } else {
+            //聊天推送
+            var po = $ionicPopup.alert({
+              title: 'openNotification: ' + $scope.alertContent,
+              scope: $scope
+            });
+            $timeout(function () {
+              po.close();
+            }, 10000);
+
+          }
+
           /*if($state.current.name == 'tab.chat-detail') {
             //window.plugins.jPushPlugin.clearAllNotification();
 
           } else {
-          }*/
-
-          //判断行程状态
-          $http({
-            method: 'GET',
-            url: Host + '/trips/' + RootService.data.pushTripId,
-            headers: Headers
-          }).success(function (data, status) {
-            console.log(data[0].trips_status);
-
-            var pop = $ionicPopup.alert({
-              title: 'trips_status:' + data[0].trips_status,
-              scope: $scope
-            });
-          }).error(function (data, status) {
-            console.log(data, status);
-          });
 
           $scope.$apply();
+          }*/
         }, false);
       }
       //判断登录初始化
@@ -204,11 +269,16 @@ angular.module('starter.controllers', [])
             toState.name == 'tab.destination-country-detail' || toState.name == 'tab.destination-impress' || toState.name == 'tab.destination-city' ||
             toState.name == 'tab.destination-city-detail' || toState.name == 'tab.city-scenery-detail' || toState.name == 'tab.publish-country'
             || toState.name == 'tab.publish-addCity'|| toState.name == 'tab.continue-addCity' || toState.name == 'tab.plan-detail' || toState.name == 'tab.plan-other'
-            || toState.name == 'tab.journey-cost-detail') {
+            || toState.name == 'tab.journey-cost-detail' || toState.name == 'tab.trip-wait-comment' || toState.name == 'tab.my-trip-detail') {
           $scope.root.hideTabs = true;
         } else {
           $scope.root.hideTabs = false;
         }
+        //隐藏消息提示点
+        if(toState.name == 'tab.message') {
+          $scope.root.hadNewMsg = false;
+        }
+
       });
       $scope.$on('$locationChangeStart', function (e, prev, next) {
         //是否登录
@@ -316,7 +386,7 @@ angular.module('starter.controllers', [])
       $scope.initPublishView = function () {
         $state.go('tab.publish');
         $ionicHistory.goToHistoryRoot($localStorage.get('publishId'));
-      }
+      };
 
     }])
 
@@ -567,7 +637,8 @@ angular.module('starter.controllers', [])
             console.log(data, status);
           });
 
-          //$location.path('/' + $scope.traveler.country_code + '_' + $scope.$parent.$parent.root.uId + '_0/travelerTag');
+          //存储昵称
+          $localStorage.set('nickname', $scope.traveler.nickname);
         }
       };
       //标签
@@ -699,7 +770,16 @@ angular.module('starter.controllers', [])
         $scope.tipsModal = modal;
         $scope.t = 'content';
       });
-      $scope.openTips = function () {
+      $scope.openTips = function (id) {
+        //攻略、心得数据
+        /*$http({
+
+         }).success(function (data, status) {
+
+         }).error(function (data, status) {
+
+         });*/
+
         $scope.tipsModal.show();
       };
       $scope.closeTips = function () {
@@ -896,7 +976,8 @@ angular.module('starter.controllers', [])
       });
   }])
 
-  .controller('MessageCtrl', function ($scope, Chats) {
+  .controller('MessageCtrl', ['$scope', 'Chats', '$ionicHistory', '$localStorage',
+    function ($scope, Chats, $ionicHistory, $localStorage) {
 
     // when view are recreated or on app start, instead of every page change. To listen for when this page is active
     // (for example, to refresh data), listen for the $ionicView.enter event:
@@ -904,15 +985,19 @@ angular.module('starter.controllers', [])
       console.log(e, data);
     });
 
+    // view id
+    $localStorage.set('msgId', $ionicHistory.currentHistoryId());
+
     $scope.chats = Chats.all();
     $scope.remove = function (chat) {
       Chats.remove(chat);
     };
-  })
+  }])
 
   .controller('ChatDetailCtrl', ['$scope', '$ionicScrollDelegate', '$state', '$stateParams', 'Chats', '$localStorage', '$timeout',
-    '$ionicPopup', 'RootService',
-    function ($scope, $ionicScrollDelegate, $state, $stateParams, Chats, $localStorage, $timeout, $ionicPopup, RootService) {
+    '$ionicPopup', 'RootService', '$ionicHistory', '$location',
+    function ($scope, $ionicScrollDelegate, $state, $stateParams, Chats, $localStorage, $timeout, $ionicPopup, RootService,
+              $ionicHistory, $location) {
       console.log($stateParams.chatId);
       $scope.chatOpt = {};
       var host = 'www.ocdday.com';
@@ -920,22 +1005,41 @@ angular.module('starter.controllers', [])
       var login = $localStorage.get('uId');//登录ID
       var password = $localStorage.get('ps');//登录密码
       var toUser = $stateParams.chatId; //发送给谁
-      //var connection = null;
+
+      //初始化发布页面
+      $scope.initMsgView = function () {
+        $state.go('tab.message');
+        $ionicHistory.goToHistoryRoot($localStorage.get('msgId'));
+      };
 
       //聊天页不提示
       //window.plugins.jPushPlugin.clearAllNotification();
 
-      function rawInput(data) {
-        console.log('RECV: ' + data);
-      }
-
-      function rawOutput(data) {
-        console.log('SENT: ' + data);
-      }
       //对话数据
       var oChat = document.querySelector('#chat-div-input');
       $scope.contacts = Chats.get($stateParams.chatId);
-      $scope.chatData = RootService.chatData;
+      $scope.$on('$ionicView.enter', function () {
+        var localChatData = $localStorage.getObject(toUser);
+        console.log(!!localChatData.length);
+        //console.log(JSON.stringify(RootService.chatData));
+        if(!!localChatData.length) {
+          //如果有本地数据
+          $scope.chatData = RootService.chatData = localChatData;
+          $scope.noLocalChatData = false;
+          console.log($scope.chatData);
+        } else {
+          $scope.chatData = RootService.chatData;
+          $scope.noLocalChatData = true;
+          console.log($scope.chatData);
+        }
+
+        $scope.$apply();
+        /*var popup = $ionicPopup.alert({
+          template: 'RootService.chatData: ' + JSON.stringify(),
+          scope: $scope
+        });*/
+      });
+
 
       $scope.sendMsg = function (type) {
         if (oChat.innerHTML) {
@@ -944,7 +1048,6 @@ angular.module('starter.controllers', [])
           //console.log(RootService.opt);
           var to = toUser+'@'+host;
           var d = new Date();
-          d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
 
           if($scope.aChatContent && to) {
             var reply = $msg({
@@ -962,17 +1065,12 @@ angular.module('starter.controllers', [])
                 'face': './img/hotman-2.jpg',
                 'pos': 'right',
                 'content': $scope.aChatContent.replace(/\[图片/g, './img/face/').replace(/\]/g, '.gif').split(' '),
-                'time': d
+                'time': d.getTime()
               }
-              /*,{
-                'name': '小红',
-                'face': './img/hotman-1.png',
-                'pos': 'left',
-                'content': ['哎哟，我们又见面了哦！']
-              }*/
             );
-          }
 
+            $localStorage.setObject(toUser, $scope.chatData);
+          }
 
           //清空输入框
           oChat.innerHTML = '';
@@ -1063,26 +1161,82 @@ angular.module('starter.controllers', [])
         console.log(oChat.innerHTML);
       };
 
-
-
       //查看行程
       $scope.lookJourney = function (tripId) {
-        alert(tripId);
-        $state.go('tab.message-journey');
+        $location.path('/tab/message-journey/' + tripId);
       }
     }])
 
-  .controller('MessageJourneyCtrl', ['$scope', '$ionicHistory', '$state', '$stateParams', 'Chats',
-    function ($scope, $ionicHistory, $state, $stateParams, Chats) {
-      //隐藏tabs
-      /*$scope.$on('$stateChangeStart', function (e, fromState, fromParam, toState, toParam) {
-        $scope.$parent.root.hideTabs = true;
-      });*/
+  .controller('MessageJourneyCtrl', ['$scope', '$ionicHistory', '$state', '$stateParams', 'Chats', '$http', 'Host', 'Headers',
+    '$localStorage',
+    function ($scope, $ionicHistory, $state, $stateParams, Chats, $http, Host, Headers, $localStorage) {
 
+      $scope.tripId = $stateParams.tripId;
+      //
       $scope.back = function () {
         $ionicHistory.goBack();
       };
 
+      $scope.$on('$ionicView.enter', function (e, data) {
+        console.log(data.stateName);
+        if(data.stateName == 'tab.message-journey') {
+
+          //行程计划数据
+          $http({
+            method: 'GET',
+            url: Host + '/trips/' + $stateParams.tripId,
+            headers: Headers
+          }).success(function (data, status) {
+            console.log(data,status);
+            $scope.trips_plan = data[0].trips_plan.content;
+          }).error(function (data, status) {
+            console.log(data,status);
+          });
+        } else if(data.stateName == "tab.journey-cost-detail") {
+          //行程费用数据
+          $http({
+            method: 'GET',
+            url: Host + '/trips/' + $stateParams.tripId + '/bill',
+            headers: Headers
+          }).success(function (data, status) {
+            console.log(data,status);
+            $scope.trips_bill = data[0];
+            $localStorage.set('bill_total_' + $scope.tripId, data[0].bill_total);
+          }).error(function (data, status) {
+            console.log(data,status);
+          });
+        } else if(data.stateName == 'tab.journey-confirm') {
+          //行程确认
+          $http({
+            method: 'PUT',
+            url: Host + '/trips/' + $stateParams.tripId + '/confirmplan',
+            headers: Headers,
+            data: {
+              userPassword: $localStorage.get('ps'),
+              message: 'hi 大叔,你的行程我灰常满意,已经确认了哦!'
+            }
+          }).success(function (data, status) {
+            console.log(data,status);
+          }).error(function (data, status) {
+            console.log(data,status);
+          });
+        }
+      });
+
+
+      //拒绝行程
+      $scope.refuseTrip = function (tripId) {
+        console.log(tripId);
+        /*$http({
+          method: 'PUT',
+          url: Host + '/trips/' + $stateParams.tripId + '/refuse',
+          headers: Headers
+        }).success(function (data, status) {
+          console.log(data,status);
+        }).error(function (data, status) {
+          console.log(data,status);
+        });*/
+      }
     }])
 
   .controller('MyCtrl', ['$scope', '$rootScope', '$ionicSideMenuDelegate', '$ionicPopup', '$localStorage', '$state', '$http', 'Headers',
@@ -1123,18 +1277,7 @@ angular.module('starter.controllers', [])
 
   /*.controller('MyTripCtrl', ['$scope', '$ionicSideMenuDelegate', '$http', 'Host', 'Headers', '$localStorage', '$stateParams',
     function ($scope, $ionicSideMenuDelegate, $http, Host, Headers, $localStorage, $stateParams) {
-      //$scope.tripOpt = {};
-      //评价星级
-      //$scope.setStar = function (n) {
-      //  for(var i = 0; i < 6; i++) {
-      //    if( i < n ) {
-      //      $scope.tripOpt['star_' + (i + 1)] = true;
-      //    } else {
-      //      $scope.tripOpt['star_' + (i + 1)] = false;
-      //    }
-      //  }
-      //  $scope.tripOpt.starLevel = n;
-      //};
+
       //行程账单
       //$http({
       //  method: 'PUT',
@@ -1180,6 +1323,7 @@ angular.module('starter.controllers', [])
     '$ionicPopup', '$state',
     function ($scope, $ionicSideMenuDelegate, $http, Host, Headers, $localStorage, $stateParams, $ionicPopup, $state) {
       $scope.tripWaitOpt = {};
+      $scope.tripId = $stateParams.trips_orderid;
 
       //行程详情
       $http({
@@ -1196,6 +1340,7 @@ angular.module('starter.controllers', [])
         });
         console.log(data, status);
         $scope.tripData = data[0];
+        $scope.tripWaitOpt.trips_sir = data[0].trips_sir;
       }).error(function (data, status) {
         console.log(data, status);
       });
@@ -1246,6 +1391,87 @@ angular.module('starter.controllers', [])
 
       };
 
+      $scope.$on('$ionicView.enter', function (e, data) {
+        if(data.stateName == 'tab.trip-wait-pay') {
+          if($localStorage.get('bill_total_' + $stateParams.trips_orderid)) {
+            $scope.bill_total = $localStorage.get('bill_total_' + $stateParams.trips_orderid);
+          } else {
+            //行程费用数据
+            $http({
+              method: 'GET',
+              url: Host + '/trips/' + $stateParams.trips_orderid + '/bill',
+              headers: Headers
+            }).success(function (data, status) {
+              console.log(data,status);
+              $scope.bill_total = data[0].bill_total;
+              $localStorage.set('bill_total_' + $stateParams.trips_orderid, data[0].bill_total);
+            }).error(function (data, status) {
+              console.log(data,status);
+            });
+          }
+        } else if(data.stateName == 'tab.my-trip-detail') {
+          //行程费用数据
+          $http({
+            method: 'GET',
+            url: Host + '/trips/' + $stateParams.trips_orderid + '/bill',
+            headers: Headers
+          }).success(function (data, status) {
+            console.log(data,status);
+            $scope.trips_bill = data[0];
+            $localStorage.set('bill_total_' + $scope.tripId, data[0].bill_total);
+          }).error(function (data, status) {
+            console.log(data,status);
+          });
+        }
+      });
+      //去付款
+      $scope.toPay = function () {
+        $http({
+          method: 'PUT',
+          url: Host + '/trips/' + $stateParams.trips_orderid + '/pay',
+          headers: Headers,
+          data: {
+            "userPassword":"0000",
+            "message":"hi 大叔,大洋已上缴牛果果,开始我们的旅程吧!"
+          }
+        }).success(function (data, status) {
+          console.log(data,status);
+          $state.go('tab.my-trip');
+        }).error(function (data, status) {
+          console.log(data,status);
+        });
+      };
+      //评价星级
+      $scope.setStar = function (n) {
+        for(var i = 0; i < 6; i++) {
+          if( i < n ) {
+            $scope.tripWaitOpt['star_' + (i + 1)] = true;
+          } else {
+            $scope.tripWaitOpt['star_' + (i + 1)] = false;
+          }
+        }
+        $scope.tripWaitOpt.starLevel = n;
+      };
+
+      //评价果先生
+      $scope.commentSir = function () {
+        if($scope.tripWaitOpt.starLevel){
+          $http({
+            method: 'PUT',
+            url: Host + '/trips/' + $stateParams.trips_orderid + '/review',
+            headers: Headers,
+            data: {
+              "user_id": $scope.tripWaitOpt.trips_sir,
+              "val": $scope.tripWaitOpt.starLevel
+            }
+          }).success(function (data, status) {
+            console.log(data,status);
+            $state.go('tab.my-trip');
+          }).error(function (data, status) {
+            console.log(data,status);
+          });
+        }
+      };
 
     }]);
 

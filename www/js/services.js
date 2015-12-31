@@ -14,14 +14,14 @@ angular.module('starter.services', [])
     // Some fake testing data
     var chats = [{
       id: '0086_18810938510_0',
-      name: '牛牛',
+      name: '牛牛宝',
       lastText: 'Baby 叫你洗衣服',
       face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       'pos': 'left',
       time: new Date().getTime()
     },{
       id: '0086_18810938510_1',
-      name: 'Jason',
+      name: 'Jason_sir',
       lastText: 'Baby 叫你洗衣服',
       face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       'pos': 'left',

@@ -1,11 +1,10 @@
-<ion-view hide-nav-bar="true" id="trip-comment">
-  <ion-header-bar>
+<ion-view view-title="评价" id="trip-comment">
+  <!--<ion-header-bar>
     <h2 class="title">评价</h2>
-
     <div class="buttons">
       <button class="button button-clear button-brown">投诉</button>
     </div>
-  </ion-header-bar>
+  </ion-header-bar>-->
   <ion-content class="">
     <div class="list margin20-top">
       <div class="item item-avatar">
@@ -19,22 +18,28 @@
           <span class="icon ion-ios-star h5 gray"></span>
         </div>
       </div>
-      <a href="#/tab/my-trip-detail" class="item item-icon-right">
+      <a href="#/tab/my-trip-detail/{{tripId}}" class="item item-icon-right">
         查看行程及费用
         <i class="icon ion-chevron-right icon-accessory"></i>
       </a>
       <div class="item text-center">
-        <span class="icon ion-ios-star h2" ng-click="setStar(1)" ng-class="{ 'energized': tripOpt.star_1, 'gray': !tripOpt.star_1 }"></span>
-        <span class="icon ion-ios-star h2" ng-click="setStar(2)" ng-class="{ 'energized': tripOpt.star_2, 'gray': !tripOpt.star_2 }"></span>
-        <span class="icon ion-ios-star h2" ng-click="setStar(3)" ng-class="{ 'energized': tripOpt.star_3, 'gray': !tripOpt.star_3 }"></span>
-        <span class="icon ion-ios-star h2" ng-click="setStar(4)" ng-class="{ 'energized': tripOpt.star_4, 'gray': !tripOpt.star_4 }"></span>
-        <span class="icon ion-ios-star h2" ng-click="setStar(5)" ng-class="{ 'energized': tripOpt.star_5, 'gray': !tripOpt.star_5 }"></span>
+        <span class="icon ion-ios-star h2" ng-click="setStar(1)" ng-class="{ 'energized': tripWaitOpt.star_1, 'gray': !tripWaitOpt.star_1 }"></span>
+        <span class="icon ion-ios-star h2" ng-click="setStar(2)" ng-class="{ 'energized': tripWaitOpt.star_2, 'gray': !tripWaitOpt.star_2 }"></span>
+        <span class="icon ion-ios-star h2" ng-click="setStar(3)" ng-class="{ 'energized': tripWaitOpt.star_3, 'gray': !tripWaitOpt.star_3 }"></span>
+        <span class="icon ion-ios-star h2" ng-click="setStar(4)" ng-class="{ 'energized': tripWaitOpt.star_4, 'gray': !tripWaitOpt.star_4 }"></span>
+        <span class="icon ion-ios-star h2" ng-click="setStar(5)" ng-class="{ 'energized': tripWaitOpt.star_5, 'gray': !tripWaitOpt.star_5 }"></span>
       </div>
     </div>
     <div class="item item-input">
       <textarea placeholder="说点什么吧..."></textarea>
     </div>
   </ion-content>
+
+  <div class="bar bar-footer bar-green">
+    <div class="title padding5-0">
+      <span ng-class="{'disabled': !tripWaitOpt.starLevel}" ng-click="commentSir()"  class="button button-clear">评价果先生</span>
+    </div>
+  </div>
 </ion-view>
 
 

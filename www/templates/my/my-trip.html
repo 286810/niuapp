@@ -23,6 +23,24 @@
         </span>
         <span class="item-note"> <span class="green">待付款</span> </span>
       </a>
+      <div ng-repeat="trip in tripsData" ng-if="trip.trips_status == 4" class="item border0 margin10-bottom ft-14
+      padding10-top padding10-bottom rows">
+        <span class="gray col-30">{{trip.trips_leave_time | date:'MM.dd'}}-{{trip.trips_end_time | date:'MM.dd'}}</span>
+        <span class=" col-55">
+          <span ng-repeat="dest in trip.trips_dest track by $index">{{dest.city}} - </span>
+          <span>{{trip.trips_daynum}}日游</span>
+        </span>
+        <span class="item-note"> <span class="green">已付款</span> </span>
+      </div>
+      <div ng-repeat="trip in tripsData" ng-if="trip.trips_status == 5" class="item border0 margin10-bottom ft-14
+      padding10-top padding10-bottom rows">
+        <span class="gray col-30">{{trip.trips_leave_time | date:'MM.dd'}}-{{trip.trips_end_time | date:'MM.dd'}}</span>
+        <span class=" col-55">
+          <span ng-repeat="dest in trip.trips_dest track by $index">{{dest.city}} - </span>
+          <span>{{trip.trips_daynum}}日游</span>
+        </span>
+        <span class="item-note"> <span class="green">进行中</span> </span>
+      </div>
       <a ng-repeat="trip in tripsData" ng-if="trip.trips_status == 6" href="#/tab/trip-wait-comment/{{trip.trips_orderid}}" class="item border0 margin10-bottom ft-14
       padding10-top padding10-bottom rows">
         <span class="gray col-30">{{trip.trips_leave_time | date:'MM.dd'}}-{{trip.trips_end_time | date:'MM.dd'}}</span>
@@ -32,6 +50,15 @@
         </span>
         <span class="item-note"> <span class="assertive">去评价</span> </span>
       </a>
+      <div ng-repeat="trip in tripsData" ng-if="trip.trips_status == 7" class="item border0 margin10-bottom ft-14
+      padding10-top padding10-bottom rows">
+        <span class="gray col-30">{{trip.trips_leave_time | date:'MM.dd'}}-{{trip.trips_end_time | date:'MM.dd'}}</span>
+        <span class=" col-55">
+          <span ng-repeat="dest in trip.trips_dest track by $index">{{dest.city}} - </span>
+          <span>{{trip.trips_daynum}}日游</span>
+        </span>
+        <span class="item-note"> <span class="assertive">已结束</span> </span>
+      </div>
     </div>
 
   </ion-content>

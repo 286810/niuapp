@@ -1,0 +1,30 @@
+<ion-view view-title="行程及费用" id="trip-detail">
+
+  <ion-content class="stable-bg">
+    <div class="row">
+      <div class="col-10 time-line"></div>
+      <div class="list col-90">
+        <div>
+          <div class="item border0 padding item-divider stable-bg">
+            <h2 ng-repeat="bill in trips_bill.bill_detial" class="journey-date padding-left">
+              <!--<span>2015-06-09</span>-->
+              <span class="padding-left">第 {{bill.billkey}} 站：{{bill.cost}}</span>
+              <!--<span class="padding-left"> 东京 </span>-->
+            </h2>
+          </div>
+          <div class="item border0 padding item-divider stable-bg">
+            <h2 class="journey-date padding-left">
+              <span class="padding-left">服务费：500</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <div class="bar-footer bar row padding light-bg">
+    <div class="title">
+      费用总计 <span class="assertive h4">￥{{trips_bill.bill_total}}</span>
+    </div>
+  </div>
+</ion-view>

@@ -231,7 +231,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('tab.message-journey', {
-        url: '/message-journey',
+        url: '/message-journey/:tripId',
         views: {
           'tab-message': {
             templateUrl: 'templates/message/message-journey.html',
@@ -240,7 +240,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('tab.journey-cost-detail', {
-        url: '/journey-cost-detail',
+        url: '/journey-cost-detail/:tripId',
         views: {
           'tab-message': {
             templateUrl: 'templates/message/journey-cost-detail.html',
@@ -249,7 +249,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('tab.journey-confirm', {
-        url: '/journey-confirm',
+        url: '/journey-confirm/:tripId',
         views: {
           'tab-message': {
             templateUrl: 'templates/message/journey-confirm.html',
@@ -300,7 +300,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         views: {
           'tab-my': {
             templateUrl: 'templates/my/trip-wait-pay.html',
-            controller: 'MyTripCtrl'
+            controller: 'TripWaitDetailCtrl'
           }
         }
       })
@@ -309,16 +309,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         views: {
           'tab-my': {
             templateUrl: 'templates/my/trip-wait-comment.html',
-            controller: 'MyTripCtrl'
+            controller: 'TripWaitDetailCtrl'
           }
         }
       })
       .state('tab.my-trip-detail', {
-        url: '/my-trip-detail',
+        url: '/my-trip-detail/:trips_orderid',
         views: {
           'tab-my': {
-            templateUrl: 'templates/message/message-journey.html',
-            controller: 'MyTripCtrl'
+            templateUrl: 'templates/my/my-trip-detail.html',
+            controller: 'TripWaitDetailCtrl'
           }
         }
       })
