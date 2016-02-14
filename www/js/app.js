@@ -11,7 +11,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .constant('Headers', {access_token: 'test123'})
   .constant('Host', 'http://www.ocdday.com:9999')
 
-  .run(function ($ionicPlatform, $localStorage, $ionicPopup) {
+  .run(['$ionicPlatform', function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -26,9 +26,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
 
     });
-  })
+  }])
 
-  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
     $ionicConfigProvider.backButton.icon('ion-ios-arrow-back');
     $ionicConfigProvider.backButton.text(" ");
@@ -389,4 +389,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/traveler');
 
-  });
+  }]);
